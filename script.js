@@ -119,24 +119,23 @@ document.addEventListener('DOMContentLoaded', function () {
   let scrollTimer = null;
 
   function detectActiveSection() {
-    const sections = ['home', 'experience', 'education', 'publications', 'awards', 'conferences', 'skills', 'contact'];
+    const sections = ['home', 'experience', 'education', 'awards', 'publications', 'conferences', 'skills', 'contact'];
     const scrollPosition = window.scrollY + 140;
+    let activeSection = 'home';
 
-    for (let index = sections.length - 1; index >= 0; index -= 1) {
-      const sectionId = sections[index];
+    sections.forEach(function (sectionId) {
       const target = document.getElementById(sectionId);
       if (!target) {
-        continue;
+        return;
       }
 
       const sectionTop = target.offsetTop;
       if (scrollPosition >= sectionTop) {
-        updateUrlForSection(sectionId);
-        return;
+        activeSection = sectionId;
       }
-    }
+    });
 
-    updateUrlForSection('home');
+    updateUrlForSection(activeSection);
   }
 
   window.addEventListener('scroll', function () {
