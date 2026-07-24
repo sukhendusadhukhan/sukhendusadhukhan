@@ -5,6 +5,17 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');
 
+  const routeMap = {
+    home: '/',
+    experience: '/experience',
+    education: '/education',
+    publications: '/publications',
+    awards: '/awards',
+    conferences: '/conferences',
+    skills: '/skills',
+    contact: '/contact',
+  };
+
   if (footerYear) {
     footerYear.textContent = String(new Date().getFullYear());
   }
@@ -16,6 +27,42 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  function getSectionIdFromLocation() {
+    const routeParam = new URLSearchParams(window.location.search).get('route');
+    if (routeParam) {
+      return routeParam.toLowerCase();
+    }
+
+    const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
+    if (pathname === '/' || pathname === '/index.html') {
+      return 'home';
+    }
+
+    const slug = pathname.split('/').filter(Boolean).pop().toLowerCase();
+    return Object.keys(routeMap).find(function (key) {
+      return routeMap[key].replace(/^\//, '').toLowerCase() === slug;
+    }) || null;
+  }
+
+  function scrollToSection(sectionId, shouldUpdateUrl) {
+    const normalizedSection = (sectionId || 'home').replace(/^#/, '');
+    const target = document.getElementById(normalizedSection);
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (normalizedSection === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    if (shouldUpdateUrl) {
+      const nextPath = routeMap[normalizedSection] || '/';
+      const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+      if (currentPath !== nextPath) {
+        history.pushState({ section: normalizedSection }, '', nextPath);
+      }
+    }
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (event) {
       const targetId = anchor.getAttribute('href');
@@ -23,15 +70,25 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
       event.preventDefault();
-      const target = document.querySelector(targetId);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      const sectionId = targetId.replace(/^#/, '');
+      scrollToSection(sectionId, true);
       if (navMenu && navMenu.classList.contains('open')) {
         navMenu.classList.remove('open');
       }
     });
   });
+
+  window.addEventListener('popstate', function () {
+    const sectionId = getSectionIdFromLocation();
+    scrollToSection(sectionId, false);
+  });
+
+  const initialSection = getSectionIdFromLocation();
+  if (initialSection) {
+    setTimeout(function () {
+      scrollToSection(initialSection, false);
+    }, 60);
+  }
 
   if (form && formStatus) {
     form.addEventListener('submit', function (event) {

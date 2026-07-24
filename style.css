@@ -258,6 +258,65 @@ textarea {
   color: #0f172a;
 }
 
+.profile-visual-card {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(255,255,255,0.95));
+}
+
+.profile-photo-shell {
+  position: relative;
+  width: min(210px, 100%);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  padding: 0.35rem;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.25);
+}
+
+.profile-photo-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0.2rem;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.profile-photo,
+.profile-photo-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-photo-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.profile-photo-shell.fallback-visible .profile-photo-fallback {
+  display: flex;
+}
+
+.profile-photo-caption {
+  text-align: center;
+}
+
+.profile-photo-caption p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .hero-feature-card {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(255,255,255,0.95));
 }
