@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="page-loader" id="page-loader" aria-hidden="true">
+      <div class="loader-ring"></div>
+      <div class="loader-text">Initializing portfolio</div>
+    </div>
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="#home">Dr. Sukhendu Sadhukhan</a>
@@ -35,6 +39,11 @@
 
     <main>
       <section class="hero-section" id="home">
+        <div class="ambient-layer" aria-hidden="true">
+          <span class="ambient-orb orb-one"></span>
+          <span class="ambient-orb orb-two"></span>
+          <span class="ambient-orb orb-three"></span>
+        </div>
         <div class="container hero-grid">
           <div class="hero-copy">
             <div class="hero-pill-row">
@@ -45,10 +54,7 @@
             <p class="eyebrow">Post-Doctoral Researcher · SATIE, ENS Paris Saclay</p>
             <h1>Dr. Sukhendu Sadhukhan</h1>
             <p class="hero-description">
-              Dedicated physicist and researcher working at the frontier of thermomagnetic energy generators,
-              multiferroics, and advanced nanomaterials. Currently pursuing post-doctoral research at SATIE
-              Laboratory, ENS Paris Saclay, France while maintaining a strong publication record and experience
-              in laboratory automation, device fabrication, and web application development.
+              Dr. Sukhendu Sadhukhan is a physicist and researcher currently working as a Post-Doctoral Researcher at SATIE, ENS Paris-Saclay, University Paris-Saclay, France. His work spans condensed matter physics, multiferroics, nanomaterials, functional materials, device fabrication, instrumentation automation, scientific data acquisition, and interdisciplinary academic research. He has authored 27 published research articles, holds a published patent, and brings strong experience in teaching, student mentorship, and research laboratory development.
             </p>
             <div class="hero-actions">
               <a class="button button-primary" href="#contact">Let’s connect</a>
@@ -82,7 +88,7 @@
               <ul class="feature-list">
                 <li>Thermomagnetic energy generation</li>
                 <li>Multiferroic and nanomaterial research</li>
-                <li>Laboratory automation and instrumentation</li>
+                <li>Instrumentation automation, characterization, and research leadership</li>
               </ul>
             </div>
             <div class="panel-card">
@@ -90,15 +96,16 @@
               <div class="tags-grid">
                 <span class="tag">Multiferroics</span>
                 <span class="tag">Nanomaterials</span>
-                <span class="tag">Thermomagnetic Generators</span>
+                <span class="tag">Functional Materials</span>
                 <span class="tag">Condensed Matter Physics</span>
-                <span class="tag">Android Development</span>
+                <span class="tag">LabVIEW / Python / MATLAB</span>
+                <span class="tag">Android & Web Development</span>
               </div>
             </div>
             <div class="panel-card stats-card">
               <div class="stat-item">
-                <span class="stat-value">24</span>
-                <span class="stat-label">Journal Publications</span>
+                <span class="stat-value">27</span>
+                <span class="stat-label">Scopus-indexed Publications</span>
               </div>
               <div class="stat-item">
                 <span class="stat-value">10</span>
@@ -120,29 +127,29 @@
       <section class="section container" id="highlights">
         <div class="section-heading">
           <h2>Key Highlights</h2>
-          <p>Accomplishments and research milestones in materials science and experimental physics.</p>
+          <p>Selected scientific milestones, recognitions, and professional strengths from the latest CV.</p>
         </div>
         <div class="card-grid">
           <article class="info-card">
-            <p class="card-text">Patent Published (No. 202031035590)</p>
+            <p class="card-text">Patent published (No. 202031035590)</p>
           </article>
           <article class="info-card">
-            <p class="card-text">Editor of International Publication</p>
+            <p class="card-text">Editor of an international publication</p>
           </article>
           <article class="info-card">
-            <p class="card-text">Qualified NET with JRF — AIR 163 (2016) & AIR 63 (2017)</p>
+            <p class="card-text">Qualified UGC-CSIR NET with JRF twice — AIR 163 (2016) and AIR 63 (2017)</p>
           </article>
           <article class="info-card">
-            <p class="card-text">Android & Web App Developer</p>
+            <p class="card-text">Android and web app developer with hands-on programming experience</p>
           </article>
           <article class="info-card">
-            <p class="card-text">24 Papers in International Journals</p>
+            <p class="card-text">27 published research articles and 10 manuscripts under review</p>
           </article>
           <article class="info-card">
-            <p class="card-text">Young Researcher Award 2022 (InSc)</p>
+            <p class="card-text">Advanced hands-on expertise in XRD, FESEM, SEM, EDAX, VSM, PPMS, dielectric and ferroelectric systems</p>
           </article>
           <article class="info-card">
-            <p class="card-text">Young Scientist Award (ScienceFather)</p>
+            <p class="card-text">Young Researcher Award 2022 (InSc) and Young Scientist Award (ScienceFather)</p>
           </article>
         </div>
       </section>
@@ -180,10 +187,10 @@
         </div>
       </section>
 
-      <section class="section container" id="experience">
+      <section class="section container" id="experience" data-theme="physics">
         <div class="section-heading">
           <h2>Professional Experience</h2>
-          <p>Academic and research positions spanning international research, teaching, and materials science.</p>
+          <p>Academic and research positions spanning post-doctoral research, teaching, and multidisciplinary instrumentation work.</p>
         </div>
         <div class="timeline-grid">
           <article class="timeline-card">
@@ -192,7 +199,7 @@
               <span class="tag">France</span>
             </header>
             <p class="meta">SATIE, ENS Paris Saclay · University Paris Saclay · 01.10.2024 – Present</p>
-            <p>Conducting post-doctoral research at the SATIE laboratory, focusing on thermomagnetic energy generators and advanced nanomaterial characterization. Working at the forefront of energy harvesting technology using magnetic materials.</p>
+            <p>Currently working as a post-doctoral researcher at SATIE, ENS Paris-Saclay, University Paris-Saclay, France, contributing to research in condensed matter physics, functional materials, multiferroics, nanomaterials, and device fabrication.</p>
             <div class="tag-list">
               <span>Thermomagnetic Energy Generators</span>
               <span>Nanomaterials</span>
@@ -207,7 +214,7 @@
               <span class="tag">West Bengal, India</span>
             </header>
             <p class="meta">Dr. Sudhir Chandra Sur Institute of Technology & Sports Complex · 22.08.2023 – 30.09.2024</p>
-            <p>Taught undergraduate Physics courses, conducted laboratory sessions, and mentored students in research projects. Continued research on multiferroic materials alongside teaching duties.</p>
+            <p>Served as Assistant Professor of Physics at Dr. Sudhir Chandra Sur Institute of Technology & Sports Complex, teaching undergraduate physics, mentoring students, and supporting research culture alongside academic duties.</p>
             <div class="tag-list">
               <span>Teaching</span>
               <span>Physics</span>
@@ -218,11 +225,26 @@
 
           <article class="timeline-card">
             <header>
+              <h3>Convenor, Research & Development Cell and Innovation & Incubation Cell</h3>
+              <span class="tag">Academic Leadership</span>
+            </header>
+            <p class="meta">Institutional leadership role · 2023 – Present</p>
+            <p>Contributed to institutional research growth by promoting innovation, incubation activities, academic-industry engagement, and a stronger research ecosystem in higher education.</p>
+            <div class="tag-list">
+              <span>Research Leadership</span>
+              <span>Innovation</span>
+              <span>Incubation</span>
+              <span>Higher Education</span>
+            </div>
+          </article>
+
+          <article class="timeline-card">
+            <header>
               <h3>Guest Lecturer</h3>
               <span class="tag">West Bengal, India</span>
             </header>
             <p class="meta">Khalisani Mahavidyalaya · 01.06.2023 – 01.09.2023</p>
-            <p>Delivered guest lectures in Physics for undergraduate students, covering topics in condensed matter physics and modern physics.</p>
+            <p>Delivered guest lectures in Physics for undergraduate students, covering condensed matter physics and modern physics.</p>
             <div class="tag-list">
               <span>Teaching</span>
               <span>Physics</span>
@@ -232,11 +254,11 @@
 
           <article class="timeline-card">
             <header>
-              <h3>Research Fellow (JRF/SRF)</h3>
+              <h3>Research Fellow</h3>
               <span class="tag">Burdwan, West Bengal, India</span>
             </header>
-            <p class="meta">Department of Physics, University of Burdwan · 07/2018 – 07/2023</p>
-            <p>Conducted doctoral research on magneto-electric behavior of multiferroic materials at the Solid State Research Laboratory (SSRL). Synthesized and characterized rare-earth orthoferrite nanoparticles, investigated structural, magnetic, dielectric, and ferroelectric properties, and explored magnetoelectric coupling mechanisms.</p>
+            <p class="meta">Department of Physics, University of Burdwan · July 2018 – July 2023</p>
+            <p>Worked as a Research Fellow during doctoral studies, focusing on magneto-electric behavior in nanocrystalline, nanocomposite, and bulk multiferroics prepared through chemical and solid-state routes.</p>
             <div class="tag-list">
               <span>Research</span>
               <span>Multiferroics</span>
@@ -247,35 +269,35 @@
         </div>
       </section>
 
-      <section class="section container" id="education">
+      <section class="section container" id="education" data-theme="physics">
         <div class="section-heading">
           <h2>Education</h2>
-          <p>Academic qualifications from doctoral research to secondary education.</p>
+          <p>Academic qualifications from secondary education to doctoral research and national-level examinations.</p>
         </div>
         <div class="timeline-grid">
           <article class="timeline-card">
             <header>
               <h3>Doctor of Philosophy (Ph.D.) in Physics</h3>
-              <span class="tag">University of Burdwan</span>
+              <span class="tag">The University of Burdwan</span>
             </header>
             <p class="meta">Awarded: 04.09.2023</p>
-            <p>Thesis: Magneto-Electric Behavior of Some Multiferroics Belonging to Different Structural Families.</p>
+            <p>Thesis: “To study the magneto-electric behavior of some nanocrystalline, nanocomposite and bulk multiferroics prepared by chemical and solid-state reaction routes.”</p>
             <p><strong>Supervisor:</strong> Prof. Pabitra Kumar Chakrabarti</p>
             <div class="tag-list">
               <span>Multiferroics</span>
               <span>Nanomaterials</span>
               <span>Magnetoelectric Coupling</span>
-              <span>X-ray Crystallography</span>
+              <span>Materials Characterization</span>
             </div>
           </article>
 
           <article class="timeline-card">
             <header>
               <h3>Master of Science (M.Sc.) in Physics</h3>
-              <span class="tag">University of Burdwan</span>
+              <span class="tag">The University of Burdwan</span>
             </header>
-            <p class="meta">2016 – 2018</p>
-            <p><strong>Grade:</strong> 8.16 CGPA</p>
+            <p class="meta">2015 – 2017</p>
+            <p><strong>Grade:</strong> First Class · 8.16 CGPA (approx. 76.60%)</p>
             <div class="tag-list">
               <span>Condensed Matter Physics</span>
               <span>Quantum Mechanics</span>
@@ -286,10 +308,10 @@
           <article class="timeline-card">
             <header>
               <h3>Bachelor of Science (B.Sc.) Physics Honours</h3>
-              <span class="tag">Hooghly Mohsin College</span>
+              <span class="tag">The University of Burdwan</span>
             </header>
-            <p class="meta">University of Burdwan · 2013 – 2016</p>
-            <p><strong>Honors:</strong> College Topper</p>
+            <p class="meta">2011 – 2015</p>
+            <p><strong>Honors:</strong> First Class · 60.38% · College Topper</p>
             <div class="tag-list">
               <span>Physics</span>
               <span>Mathematics</span>
@@ -300,9 +322,10 @@
           <article class="timeline-card">
             <header>
               <h3>Higher Secondary (H.S.) — Science</h3>
-              <span class="tag">West Bengal Council of Higher Secondary Education</span>
+              <span class="tag">Chandannagar Bangavidyalaya</span>
             </header>
-            <p class="meta">2013</p>
+            <p class="meta">2011 · WBCHSE</p>
+            <p><strong>Grade:</strong> First Class · 73.40%</p>
             <div class="tag-list">
               <span>Science</span>
               <span>Physics</span>
@@ -314,21 +337,36 @@
           <article class="timeline-card">
             <header>
               <h3>Madhyamik (Secondary)</h3>
-              <span class="tag">West Bengal Board of Secondary Education</span>
+              <span class="tag">Nawpara High School</span>
             </header>
-            <p class="meta">2011</p>
-            <p><strong>Honors:</strong> School Topper</p>
+            <p class="meta">2009 · WBBSE</p>
+            <p><strong>Honors:</strong> Distinction · 80.50% · School Topper</p>
             <div class="tag-list">
               <span>Secondary Education</span>
+            </div>
+          </article>
+
+          <article class="timeline-card">
+            <header>
+              <h3>National-Level Examinations</h3>
+              <span class="tag">UGC-CSIR NET & GATE</span>
+            </header>
+            <p class="meta">Qualified twice for UGC-CSIR NET with JRF</p>
+            <p><strong>Results:</strong> AIR 163 in 2016 and AIR 63 in 2017; also qualified GATE.</p>
+            <div class="tag-list">
+              <span>JRF</span>
+              <span>NET</span>
+              <span>GATE</span>
+              <span>Academic Excellence</span>
             </div>
           </article>
         </div>
       </section>
 
-      <section class="section container" id="awards">
+      <section class="section container" id="awards" data-theme="physics">
         <div class="section-heading">
           <h2>Awards & Recognition</h2>
-          <p>Awards and honors earned for academic excellence, research contributions, and scientific leadership.</p>
+          <p>Awards and recognitions earned for academic excellence, research contributions, and scientific leadership.</p>
         </div>
         <div class="card-grid">
           <article class="award-card highlight">
@@ -381,129 +419,239 @@
               <span>2017</span>
             </article>
           </div>
-          <p class="note">Qualified National Eligibility Test (NET) with Junior Research Fellowship (JRF) twice, demonstrating sustained academic excellence in physical sciences.</p>
+          <p class="note">Qualified UGC-CSIR NET with JRF twice, with AIR 163 in 2016 and AIR 63 in 2017, demonstrating sustained academic excellence in physical sciences.</p>
         </div>
       </section>
 
-      <section class="section container" id="publications">
+      <section class="section container" id="publications" data-theme="physics">
         <div class="section-heading">
           <h2>Publications & Patent</h2>
-          <p>Selected papers, reviews, and patent contributions in experimental physics and materials science.</p>
+          <p>Research interests and publication record extracted from the CV, including 27 published articles, 10 manuscripts under review, and 1 published patent.</p>
         </div>
         <div class="publication-list">
           <article class="publication-card">
-            <h3>Multiferroic properties and magnetoelectric coupling observed in nanocrystalline HoFeO3</h3>
-            <p>S. Sadhukhan, A. S. Mahapatra, A. Mitra, P. K. Chakrabarti</p>
-            <p class="publication-meta">Journal of Alloys and Compounds · 2022 · 907, 164443 · IF 5.316</p>
+            <h3>Research Interest</h3>
+            <p><strong>Multiferroics (Condensed Matter Physics)</strong></p>
+            <div class="tag-list">
+              <span>Nanomaterials</span>
+              <span>Nanocomposites</span>
+              <span>X-ray Crystallography</span>
+              <span>Structural Characterization</span>
+              <span>Microstructural Characterization</span>
+              <span>Magnetic Properties</span>
+              <span>Dielectric Properties</span>
+              <span>Ferroelectric Properties</span>
+              <span>J-E Properties</span>
+              <span>Magnetoelectric Coupling</span>
+            </div>
+          </article>
+          <article class="publication-card patent-card">
+            <h3>Patent: A field-based kit and method for screening of hemoglobinopathy condition from normal</h3>
+            <p><strong>Patent Number:</strong> 202031035590</p>
+            <p><strong>Publication Date:</strong> 25 February 2022</p>
+            <p><strong>Published at:</strong> IP India</p>
+            <p><strong>Inventors:</strong> Anupam Basu, Sukhendu Sadhukhan, Pabitra Kumar Chakrabarti, Prosanto Chowdhury, Tamoghna Chowdhuy, Dipankar Saha, Upasona Bhattacharya, Debashis Pal, Nibedita Mitra</p>
+          </article>
+          <article class="publication-card">
+            <h3>Multiferroic properties and magnetoelectric coupling observed in nanocrystalline HoFeO₃</h3>
+            <p>Sukhendu Sadhukhan, Abhik S. Mahapatra, Ayan Mitra, Pabitra K. Chakrabarti</p>
+            <p class="publication-meta">Journal of Alloys and Compounds · 2022 · Volume 907 · Article 164443 · DOI 10.1016/j.jallcom.2022.164443 · Impact Factor 6.371 · ISSN 0925-8388</p>
             <a href="https://doi.org/10.1016/j.jallcom.2022.164443" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Enhanced multiferroicity of Ho0.95Co0.05Fe0.95Ti0.05O3 by co-doping in HoFeO3 nanoparticle system</h3>
-            <p>S. Sadhukhan, A. S. Mahapatra, A. Mitra, P. K. Chakrabarti</p>
-            <p class="publication-meta">Journal of Magnetism and Magnetic Materials · 2023 · 170861 · IF 2.993</p>
-            <a href="https://doi.org/10.1016/j.jmmm.2023.170861" target="_blank" rel="noopener noreferrer">View Article</a>
+            <h3>Magnetoelectric multiferroicity in a newly derived nanocomposite system of (Y₀.₉₇Al₀.₀₃FeO₃)ₓ((Bi₀.₅Na₀.₅)₀.₉₄Ba₀.₀₆TiO₃)₁₋ₓ where x = 0.3, 0.5</h3>
+            <p>Sukhendu Sadhukhan, Ayan Mitra, Abhik S. Mahapatra, Chandi Charan Dey, Souvick Das, Pabitra K. Chakrabarti</p>
+            <p class="publication-meta">Journal of Magnetism and Magnetic Materials · 2022 · Volume 559 · Article 169553 · DOI 10.1016/j.jmmm.2022.169553 · Impact Factor 3.097 · ISSN 0304-8853</p>
+            <a href="https://doi.org/10.1016/j.jmmm.2022.169553" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
             <h3>Strong modulation effects on magnetoelectric behavior of Co-ferrite nanoparticles incorporated in ZnO medium in nano-regime synthesized in chemical routes</h3>
-            <p>S. Sadhukhan, A. Mitra, P. K. Chakrabarti</p>
-            <p class="publication-meta">Applied Physics A · 2023 · IF 2.792</p>
+            <p>Sukhendu Sadhukhan, Abhik S. Mahapatra, Ayan Mitra, Nupur Bhakta, Souvick Das, Ayan Mallick, Anupam Banerjee, Souvik Chatterjee, J. M. Greneche, Pabitra K. Chakrabarti</p>
+            <p class="publication-meta">Applied Physics A · 2023 · Volume 129 · Article 68 · DOI 10.1007/s00339-022-06345-8 · Impact Factor 2.983</p>
             <a href="https://doi.org/10.1007/s00339-022-06345-8" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Enhanced multiferroicity of LaFeO3 nanoparticle system in La0.9Er0.1FeO3</h3>
-            <p>S. Sadhukhan, A. Mondal, P. K. Chakrabarti, A. Mitra</p>
-            <p class="publication-meta">Ceramics International · 2025</p>
-            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5159553" target="_blank" rel="noopener noreferrer">View Article</a>
+            <h3>Room Temperature Multiferroicity of Hexagonal LuFeO₃ and its Enhancement by Co-Doping in Lu₀.₉Co₀.₁Fe₀.₉Ti₀.₁O₃ Nanoparticle System</h3>
+            <p>Sukhendu Sadhukhan, Ayan Mitra, Abhik S. Mahapatra, Pabitra K. Chakrabarti</p>
+            <p class="publication-meta">Journal of Alloys and Compounds · 2023 · Volume 956 · Article 170351 · DOI 10.1016/j.jallcom.2023.170351 · Impact Factor 6.371 · ISSN 0925-8388</p>
+            <a href="https://doi.org/10.1016/j.jallcom.2023.170351" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Optical, magnetic and electrical properties of Zn-doped HoFeO3 nanoparticles synthesized by simple co-precipitation method</h3>
-            <p>S. Sadhukhan, A. Mitra, P. K. Chakrabarti</p>
-            <p class="publication-meta">Applied Physics A · 2025</p>
-            <a href="https://doi.org/10.1007/s00339-025-09080-y" target="_blank" rel="noopener noreferrer">View Article</a>
+            <h3>Enhanced multiferroicity of Ho₀.₉₅Co₀.₀₅Fe₀.₉₅Ti₀.₀₅O₃ by co-doping in HoFeO₃ nanoparticle system</h3>
+            <p>Sukhendu Sadhukhan, Abhik S. Mahapatra, Ayan Mitra, Pabitra K. Chakrabarti</p>
+            <p class="publication-meta">Journal of Magnetism and Magnetic Materials · 2023 · Volume 579 · Article 170861 · DOI 10.1016/j.jmmm.2023.170861 · Impact Factor 3.097 · ISSN 0304-8853</p>
+            <a href="https://doi.org/10.1016/j.jmmm.2023.170861" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Synthesis, Structural, Dielectric, Electrical, and Magnetic Characterization of Dysprosium Orthoferrite Nanoparticles</h3>
-            <p>S. Sadhukhan, A. Mitra, P. K. Chakrabarti</p>
-            <p class="publication-meta">ACS Omega · 2024 · IF 4.132</p>
-            <a href="https://doi.org/10.1021/acsomega.4c10092" target="_blank" rel="noopener noreferrer">View Article</a>
+            <h3>Enhanced multiferroicity of LaFeO₃ nanoparticle system in La₀.₉Er₀.₁FeO₃</h3>
+            <p>Sukhendu Sadhukhan, Arpita Mondal, Pabitra Kumar Chakrabarti, Ayan Mitra</p>
+            <p class="publication-meta">Ceramics International · 2025 · Volume 51 · DOI 10.1016/j.ceramint.2025.06.032 · Impact Factor 5.6</p>
+            <a href="https://doi.org/10.1016/j.ceramint.2025.06.032" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Origin of Semiconductor–Metal–Semiconductor-Like Transition in LaFeO3</h3>
-            <p>S. Sadhukhan, A. Mitra, P. K. Chakrabarti</p>
-            <p class="publication-meta">Journal of Inorganic and Organometallic Polymers and Materials · 2025</p>
-            <a href="https://doi.org/10.1007/s10904-025-04110-x" target="_blank" rel="noopener noreferrer">View Article</a>
+            <h3>Electrocaloric cooling efficiency: Comparative insights on P(VDF-TrFE-CFE) polymer and BSTM ceramics</h3>
+            <p>Sukhendu Sadhukhan, Nouh Zeggai, Brahim Dkhil, Sakyo Hirose, Martino Lobue, Morgan Almanza</p>
+            <p class="publication-meta">Ceramics International · 2026 · Volume 53 · DOI 10.1016/j.ceramint.2026.02.344 · Impact Factor 5.6</p>
+            <a href="https://doi.org/10.1016/j.ceramint.2026.02.344" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Rietveld analysis, enhanced magnetic, dielectric and ferroelectric properties of Gd3+ and Ti4+ co-doped LaFeO3 multiferroic</h3>
-            <p>N. Bhakta, A. Mitra, A. Mallick, S. Sadhukhan, A. Bajorek</p>
-            <p class="publication-meta">Materials Science and Engineering: B · 2021 · 264, 114810 · IF 4.706</p>
-            <a href="https://doi.org/10.1016/j.mseb.2020.114810" target="_blank" rel="noopener noreferrer">View Article</a>
+            <h3>Modulated Magnetic and Wideband Tunable Microwave Absorption Properties of Multiferroic Nanocomposite (BiFeO₃)₀.₅(ZnO)₀.₅ in the matrix of Multiwalled Carbon Nanotube (MWCNT)</h3>
+            <p>Sukhendu Sadhukhan, Arpita Mondal, Sujay Das, Souvick Das, Chandi Charan Dey, Ayan Mallick, Nupur Bhakta, Pabitra Kumar Chakrabarti, Ayan Mitra</p>
+            <p class="publication-meta">Ceramics International · 2026 · Volume 53 · DOI 10.1016/j.ceramint.2026.02.428 · Impact Factor 5.6</p>
+            <a href="https://doi.org/10.1016/j.ceramint.2026.02.428" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Investigation of magneto-electric properties of La0.85Nd0.15Fe0.9Ti0.1O3</h3>
-            <p>N. Bhakta, S. Sadhukhan, C. C. Dey, A. Mitra, P. K. Chakrabarti</p>
-            <p class="publication-meta">Journal of Magnetism and Magnetic Materials · 2022 · 564(2), 170208 · IF 2.993</p>
+            <h3>Enhanced antibacterial activity with modified magnetic property of Azithromycin-loaded magnetic spinel ferrite MgFe₂O₄ nanoparticles</h3>
+            <p>Moupiya Ghosh, Sukhendu Sadhukhan, Chandan Ghorui, Deepshikha Datta, Aroni Chatterjee, Shubhro Debnath, Hiya Ghosh, Samir Mandal, Anil Kumar Chaudhary</p>
+            <p class="publication-meta">Materials Chemistry and Physics · 2026 · Volume 349 · Article 131806 · DOI 10.1016/j.matchemphys.2025.131806 · Impact Factor 4.7</p>
+            <a href="https://doi.org/10.1016/j.matchemphys.2025.131806" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Investigation of magneto-electric properties of La₀.₈₅Nd₀.₁₅Fe₀.₉Ti₀.₁O₃</h3>
+            <p>Nupur Bhakta, Sukhendu Sadhukhan, Chandi Charan Dey, Ayan Mitra, Pabitra K. Chakrabarti</p>
+            <p class="publication-meta">Journal of Magnetism and Magnetic Materials · 2022 · Volume 564 · Article 170208 · DOI 10.1016/j.jmmm.2022.170208 · Impact Factor 3.097 · ISSN 0304-8853</p>
             <a href="https://doi.org/10.1016/j.jmmm.2022.170208" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Simultaneous enhancement of magnetic and ferroelectric properties of LaFeO3 by co-doping with Dy3+ and Ti4+</h3>
-            <p>A. Mitra, S. Sadhukhan, et al.</p>
-            <p class="publication-meta">Journal of Physics: Condensed Matter · 2017</p>
-            <a href="https://www.researchgate.net/publication/319085343" target="_blank" rel="noopener noreferrer">View Article</a>
+            <h3>Magnetic Energy Morphing, Capacitive Concept for Ni₀.₃Zn₀.₄Ca₀.₃Fe₂O₄ Nanoparticles Embedded in Graphene Oxide Matrix, and Studies of Wideband Tunable Microwave Absorption</h3>
+            <p>Chandi Charan Dey, Sukhendu Sadhukhan, Ayan Mitra, Madhumita Dalal, Anirban Shaw, Anna Bajorek, Pabitra K. Chakrabarti</p>
+            <p class="publication-meta">ACS Applied Materials & Interfaces · 2021 · Volume 13 · Issue 39 · Pages 46967–46979 · DOI 10.1021/acsami.1c10241 · Impact Factor 10.38</p>
+            <a href="https://doi.org/10.1021/acsami.1c10241" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Structural transformation induced enhanced multiferroicity in Al3+ and Ti4+ co-doped LaFeO3</h3>
-            <p>A. Mitra, S. Sadhukhan, et al.</p>
-            <p class="publication-meta">Journal of Alloys and Compounds · 2020</p>
-            <a href="https://www.researchgate.net/publication/340838954" target="_blank" rel="noopener noreferrer">View Article</a>
+            <h3>Spin reorientation behavior and enhanced multiferroic properties of co-doped YFeO₃ towards a monophasic multiferroic ceramic Co₀.₀₅Y₀.₉₅Fe₀.₉₅Ti₀.₀₅O₃</h3>
+            <p>Souvick Das, Ayan Mitra, Sukhendu Sadhukhan, Amitabh Das, Souvik Chatterjee, Pabitra K. Chakrabarti</p>
+            <p class="publication-meta">Advanced Powder Technology · 2022 · Volume 23 · Issue 6 · Article 103622 · DOI 10.1016/j.apt.2022.103622 · Impact Factor 4.969</p>
+            <a href="https://doi.org/10.1016/j.apt.2022.103622" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Mössbauer and Magnetization study of polycrystalline multiferroic SmFeO3</h3>
-            <p>P. K. Chakrabarti, S. Sadhukhan, et al.</p>
-            <p class="publication-meta">Journal of Magnetism and Magnetic Materials · 2017</p>
-            <a href="https://www.researchgate.net/publication/316623202" target="_blank" rel="noopener noreferrer">View Article</a>
+            <h3>Electromagnetic shielding performance of Co₀.₅Zn₀.₄Cu₀.₁Fe₂O₄-GO/paraffin wax hybrid nanocomposite through magnetic energy morphing prepared by facile synthesis method</h3>
+            <p>Chandi Charan Dey, Abhik Sinha Mahapatra, Sukhendu Sadhukhan, Pabitra K. Chakrabarti</p>
+            <p class="publication-meta">Materials Today Communications · 01 June 2021 · Volume 27 · Article 102190 · DOI 10.1016/j.mtcomm.2021.102190 · Impact Factor 3.662</p>
+            <a href="https://doi.org/10.1016/j.mtcomm.2021.102190" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Hopping conduction of localized polarons with scaling behaviour in ceramic composite (YCrO3)1-x-(CoFe1.6Cr0.4O4)x</h3>
-            <p>A. Mitra, S. Sadhukhan, et al.</p>
-            <p class="publication-meta">Materials Science and Engineering: B · 2023</p>
+            <h3>Rietveld analysis, enhanced magnetic, dielectric, and ferroelectric properties of Gd³⁺ and Ti⁴⁺ co-doped LaFeO₃ multiferroic</h3>
+            <p>Nupur Bhakta, Ayan Mitra, Ayan Mallick, Sukhendu Sadhukhan, Anna Bajorek, P. K. Chakrabarti</p>
+            <p class="publication-meta">Materials Science and Engineering: B · February 2021 · Volume 264 · Article 114810 · DOI 10.1016/j.mseb.2020.114810 · Impact Factor 3.407</p>
+            <a href="https://doi.org/10.1016/j.mseb.2020.114810" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
           <article class="publication-card">
-            <h3>Nanoscience in Action: Unveiling Emerging Trends in Materials and Applications</h3>
-            <p>S. Sadhukhan, et al.</p>
-            <p class="publication-meta">ACS Omega · 2024 · Review / Editorial</p>
-            <a href="https://doi.org/10.1021/acsomega.4c10929" target="_blank" rel="noopener noreferrer">View Article</a>
+            <h3>Hopping conduction of localized polarons with scaling behaviour in multiferroic ceramic composite (YCrO₃)₁₋ₓ-(CoFe₁.₆Cr₀.₄O₄)ₓ</h3>
+            <p>Souvick Das, Sukhendu Sadhukhan, Ayan Mitra, Chandi Charan Dey, P. K. Chakrabarti</p>
+            <p class="publication-meta">Materials Science and Engineering: B · 2023 · Volume 297 · Article 116720 · DOI 10.1016/j.mseb.2023.116720 · Impact Factor 3.6</p>
+            <a href="https://doi.org/10.1016/j.mseb.2023.116720" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Microwave absorption and hyperthermia properties of titanium dioxide - nickel zinc copper ferrite nanocomposite</h3>
+            <p>Ayan Mallick, Chandi Charan Dey, Sukhendu Sadhukhan, Sujay Das, Raghumani Singh Ningthoujam, Jean-Marc Greneche, Pabitra Kumar Chakrabarti</p>
+            <p class="publication-meta">Journal of Magnetism and Magnetic Materials · 2023 · Volume 587 · Article 171373 · DOI 10.1016/j.jmmm.2023.171373 · Impact Factor 3.097 · ISSN 0304-8853</p>
+            <a href="https://doi.org/10.1016/j.jmmm.2023.171373" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Exploring the Room Temperature Multiferroic Behavior and Negative Exchange Bias Effect in Ho₀.₀₅Y₀.₉₅Fe₀.₉₀Ti₀.₁₀O₃ Nanoceramic</h3>
+            <p>Souvick Das, Ayan Mitra, Sukhendu Sadhukhan, P. K. Chakrabarti</p>
+            <p class="publication-meta">Journal of Alloys and Compounds · 2024 · Volume 1002 · Article 175163 · DOI 10.1016/j.jallcom.2024.175163 · Impact Factor 6.371 · ISSN 0925-8388</p>
+            <a href="https://doi.org/10.1016/j.jallcom.2024.175163" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Study on Structural and Dielectric Behavior of Li₀.₃Zn₀.₃Co₀.₁Fe₂.₃O₄</h3>
+            <p>Madhumita Dalal, Sukhendu Sadhukhan, Pabitra Kumar Chakrabarti</p>
+            <p class="publication-meta">NanoWorld Journal · 2024 · Volume 10 (S1) · Pages S246–S249 · DOI 10.17756/nwj.2024-134 · Impact Factor 1.6</p>
+            <a href="https://doi.org/10.17756/nwj.2024-134" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Unusual magnetization and field switching effects in multifunctional Ba, Ni-doped YCrO₃ polycrystalline sample</h3>
+            <p>Souvick Das, Ayan Mitra, Sukhendu Sadhukhan, Manas Mondal, Amit Kumar, Pabitra Kumar Chakrabarti</p>
+            <p class="publication-meta">Physical Review Materials · 2024 · Volume 8 · Article 114406 · DOI 10.1103/PhysRevMaterials.8.114406 · Impact Factor 3.10</p>
+            <a href="https://doi.org/10.1103/PhysRevMaterials.8.114406" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Microwave absorption and magnetic properties of Ni-NiO-GO nanocomposites</h3>
+            <p>Manas Kumar Mondal, Nupur Bhakta, Madhumita Dalal, Sukhendu Sadhukhan, Anupam Banerjee, Chandi Charan Dey, Souvick Das, Pabitra Kumar Chakrabarti</p>
+            <p class="publication-meta">Journal of Magnetism and Magnetic Materials · 2025 · Volume 616 · Article 172819 · DOI 10.1016/j.jmmm.2025.172819 · Impact Factor 3.097 · ISSN 0304-8853</p>
+            <a href="https://doi.org/10.1016/j.jmmm.2025.172819" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Paramagnetic spin disorder on ferrimagnetic surface and dual dip microwave absorption for hydrothermally synthesized coral shaped NiCo₂O₄-rGO composite</h3>
+            <p>Manas Kumar Mondal, Chandi Charan Dey, Nupur Bhakta, Sukhendu Sadhukhan, Souvick Das, Anupam Banerjee, Pabitra Kumar Chakrabarti</p>
+            <p class="publication-meta">Journal of Magnetism and Magnetic Materials · 2025 · Volume 632 · Article 173515 · DOI 10.1016/j.jmmm.2025.173515 · Impact Factor 3.097 · ISSN 0304-8853</p>
+            <a href="https://doi.org/10.1016/j.jmmm.2025.173515" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Synthesis and characterization of Roxithromycin conjugated Zn₀.₉Cu₀.₁Fe₂O₄ nanocomposite with enhanced bactericidal efficacy</h3>
+            <p>Pintu Pratihar, Sukhendu Sadhukhan, Subhasis Rana, Srijani Karmakar, Piyali Das, Rupsa Bhattacharya, Moupriya Nag, Dibyajit Lahiri, Anindya S. Manna, Moupiya Ghosh, Dilip Kumar Maiti</p>
+            <p class="publication-meta">Journal of Drug Delivery Science and Technology · 2026 · Volume 115 · Article 107634 · DOI 10.1016/j.jddst.2025.107634 · Impact Factor 4.9</p>
+            <a href="https://doi.org/10.1016/j.jddst.2025.107634" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Improvement of magneto-electric properties of YFeO₃ by co-doping with Gd³⁺ and Ti⁴⁺ in the system of Y₀.₉₅Gd₀.₀₅Fe₀.₉₅Ti₀.₀₅O₃</h3>
+            <p>Sujay Das, Sukhendu Sadhukhan, Souvick Das, Ayan Mallick, Ayan Mitra, Anna Bajorek, Pabitra Kumar Chakrabarti</p>
+            <p class="publication-meta">Ceramics International · 2026 · Volume 52 · DOI 10.1016/j.ceramint.2026.01.361 · Impact Factor 5.6</p>
+            <a href="https://doi.org/10.1016/j.ceramint.2026.01.361" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Interface magnetic coupling and magnetization dynamic of La₂/₃Sr₁/₃MnO₃ single layer and (La₂/₃Sr₁/₃MnO₃/SrRuO₃)ₙ (n = 1, 5) superlattice on SrTiO₃(001) substrate</h3>
+            <p>Ilyas Noor Bhatti, Rachna Chaurasia, Kazi Rumanna Rahman, Sukhendu Sadhukhan, Amantulla Mansuri, Imtiaz Noor Bhatti</p>
+            <p class="publication-meta">Surfaces and Interfaces · 2026 · Volume 87 · Article 109035 · DOI 10.1016/j.surfin.2026.109035 · Impact Factor 6.3</p>
+            <a href="https://doi.org/10.1016/j.surfin.2026.109035" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Enhanced Multiferroicity of YFeO₃ by Ho³⁺ doping in Y₀.₉Ho₀.₁FeO₃</h3>
+            <p>Sujay Das, Sukhendu Sadhukhan, Manas Kumar Mondal, Ayan Mallick, Anupam Banerjee, Jean-Marc Greneche, Pabitra Kumar Chakrabarti</p>
+            <p class="publication-meta">Journal of Magnetism and Magnetic Materials · 2026 · Volume 654 · Article 174221 · DOI 10.1016/j.jmmm.2026.174221 · Impact Factor 3.097 · ISSN 0304-8853</p>
+            <a href="https://doi.org/10.1016/j.jmmm.2026.174221" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Rare earth (Yttrium)-doped TiO₂ nanoparticles as high-performance electrodes for supercapacitor applications</h3>
+            <p>R. Manigandan, S. Aravindhan, K. Guruswamy, B. J. Madhu, Sukhendu Sadhukhan, S. Srinivasan</p>
+            <p class="publication-meta">Journal of Materials Science: Materials in Electronics · 2026 · Volume 37 · Article 971 · DOI 10.1007/s10854-026-17399-2 · Impact Factor 2.9 · ISSN 1573-482X</p>
+            <a href="https://doi.org/10.1007/s10854-026-17399-2" target="_blank" rel="noopener noreferrer">View Article</a>
+          </article>
+          <article class="publication-card">
+            <h3>Integrated Bioinformatics and Structural Assessment Suggest Doxycycline as a Potential Candidate Targeting MMP7 in Lung Cancer and SSc-Associated ILD</h3>
+            <p>Sanjukta Dasgupta, Moupiya Ghosh, Sukhendu Sadhukhan, Srijit Set</p>
+            <p class="publication-meta">OMICS: A Journal of Integrative Biology · 2026 · Volume 0 · DOI 10.1177/15578100261454404 · Impact Factor 2.2 · ISSN 1557-8100</p>
+            <a href="https://doi.org/10.1177/15578100261454404" target="_blank" rel="noopener noreferrer">View Article</a>
           </article>
         </div>
-        <div class="publication-card patent-card">
-          <h3>Patent: A field-based kit and method for screening of hemoglobinopathy condition from normal</h3>
-          <p><strong>Patent No.:</strong> 202031035590</p>
-          <p><strong>Published:</strong> 25th February 2022</p>
-          <p><strong>Inventors:</strong> Sukhendu Sadhukhan et al.</p>
+        <div class="publication-card">
+          <h3>Publication Summary</h3>
+          <p><strong>No. of papers published in Scopus Indexed Journals:</strong> 27</p>
+          <p><strong>Communicated:</strong> 09</p>
+          <p><strong>No. of Papers Reviewed:</strong> 21</p>
+          <p><strong>No. of Conferences Participated:</strong> 09</p>
+          <p><strong>Poster/Oral Presented in Conferences:</strong> National 03 · International 04</p>
+          <p><strong>Workshops Attended:</strong> 05</p>
+          <p><strong>FDP Attended:</strong> 06</p>
+          <p><strong>Workshops/FDP Organized:</strong> 03</p>
+          <p><strong>h-index:</strong> 10</p>
+          <p><strong>i10-index:</strong> 10</p>
+          <p><strong>Impact factor:</strong> 10</p>
         </div>
       </section>
 
-      <section class="section container" id="conferences">
+      <section class="section container" id="conferences" data-theme="physics">
         <div class="section-heading">
           <h2>Conferences & Workshops</h2>
-          <p>Presentations, workshops attended, and professional development programs.</p>
+          <p>Oral and poster presentations, workshops attended, and faculty development programs.</p>
         </div>
         <div class="grid-2">
           <article class="conference-card">
             <h3>Oral Presentations</h3>
             <ul>
-              <li>Multiferroic properties and magnetoelectric coupling in HoFeO3 nanoparticles · International Conference on Condensed Matter Physics · 2022</li>
-              <li>Enhanced multiferroicity in co-doped HoFeO3 nanoparticle system · National Conference on Advanced Materials · 2022</li>
-              <li>Structural and magneto-electric study of LaFeO3-based nanoferrites · International Symposium on Magnetic Materials · 2021</li>
-              <li>Rietveld analysis and multiferroic properties of rare-earth orthoferrites · National Seminar on Nanoscience and Nanotechnology · 2020</li>
+              <li>Oral presentation on magnetoelectric behavior of nanocrystalline hexagonal LuFeO3 · RAMSE 2025</li>
+              <li>Oral presentation on structural and dielectric behavior of Li0.3Zn0.3Co0.1Fe2.3O4 · GC-RASM 2023</li>
+              <li>Oral presentation on enhanced magnetic properties of Al-doped YFeO3 · Crystal Growth and Spectroscopy Conference · 2022</li>
+              <li>Poster presentation on magneto-electric properties of cobalt ferrite nanoparticles incorporated in ZnO host · NCMPLA 2020</li>
             </ul>
           </article>
           <article class="conference-card">
             <h3>Poster Presentations</h3>
             <ul>
-              <li>Magnetoelectric coupling in ZnO/CoFe2O4 nanocomposites · Indian Science Congress · 2021</li>
-              <li>Dielectric and ferroelectric properties of Dy3+ and Ti4+ co-doped LaFeO3 · National Workshop on Functional Materials · 2019</li>
-              <li>Structural analysis and multiferroic characterization of SmFeO3 nanoparticles · Annual Physics Conference, University of Burdwan · 2018</li>
+              <li>Poster presentation on synthesis and characterization of hexagonal LuFeO3 ceramics · NCMPLA 2019</li>
+              <li>Poster presentation on enhanced magnetic, dielectric and ferroelectric properties of La0.9Er0.1FeO3 · CMDAYS 2018</li>
+              <li>Participation in NCMPLA 2017 and one-day national seminar on Einstein’s general theory of relativity · 2016–2017</li>
             </ul>
           </article>
         </div>
@@ -511,27 +659,80 @@
           <article class="conference-card">
             <h3>Workshops Attended</h3>
             <ul>
-              <li>Workshop on X-ray Diffraction and Rietveld Refinement · UGC-DAE Consortium for Scientific Research · 2019</li>
-              <li>Summer School on Magnetism and Magnetic Materials · IACS Kolkata · 2018</li>
-              <li>Workshop on PPMS and VSM Measurements · Quantum Design India / University of Burdwan · 2019</li>
-              <li>National Workshop on Nanomaterials: Synthesis & Characterization · DST-Sponsored Workshop · 2020</li>
+              <li>Workshop on Rietveld refinement method · UGC-DAE Consortium · 2022</li>
+              <li>Workshop on analytical techniques in modern biology · University of Burdwan · 2022</li>
+              <li>Workshop on problem formulation and research proposal writing · JIS University · 2024</li>
+              <li>Workshop on machine learning with R · Dr. Sudhir Chandra Sur Institute of Technology · 2024</li>
             </ul>
           </article>
           <article class="conference-card">
             <h3>Workshops & FDPs Organized</h3>
             <ul>
-              <li>Faculty Development Program (FDP) on Modern Physics and Condensed Matter · 2023–2024 · Dr. Sudhir Chandra Sur Institute of Technology</li>
-              <li>FDP on Research Methodology and Scientific Writing · 2022 · AICTE / University of Burdwan</li>
-              <li>FDP on Machine Learning for Materials Science · 2023 · NPTEL / IIT</li>
+              <li>International FDP on effective scientific paper, grant and patent writing · 2024</li>
+              <li>International FDP on generative AI and LLMs in academia · 2024</li>
+              <li>ATAL FDP on advances in materials science for sustainable development · 2025</li>
+              <li>FDP on MATLAB programming and applications · 2025</li>
             </ul>
           </article>
         </div>
       </section>
 
-      <section class="section container" id="skills">
+      <section class="section container" id="development" data-theme="tech">
+        <div class="section-heading">
+          <h2>Programming & Application Development</h2>
+          <p>Experience in web application development, progressive web apps, and Android app development for education, administration, and research workflows.</p>
+        </div>
+        <div class="grid-2">
+          <article class="skill-card">
+            <h3>Web Development</h3>
+            <div class="tag-list">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>JavaScript</span>
+              <span>PHP</span>
+              <span>Responsive UI/UX</span>
+              <span>PWA Development</span>
+              <span>Database-driven Apps</span>
+              <span>Payment Integration</span>
+              <span>Authentication Systems</span>
+              <span>Reporting Dashboards</span>
+            </div>
+            <p class="card-text" style="margin-top: 1rem;">Developed systems for online examinations, hostel and mess management, laboratory data management, and institutional websites.</p>
+            <ul>
+              <li><a href="https://studypoint.glitch.me" target="_blank" rel="noopener noreferrer">Study Point</a> — online examination and automated evaluation platform</li>
+              <li><a href="https://buersh.glitch.me" target="_blank" rel="noopener noreferrer">BUERSH</a> — hostel and mess management system</li>
+              <li><a href="https://ssrlbu.glitch.me" target="_blank" rel="noopener noreferrer">SSRLBU</a> — laboratory data and user management portal</li>
+              <li><a href="https://foe.org.in" target="_blank" rel="noopener noreferrer">Friends of Environment</a> — institutional website development</li>
+            </ul>
+          </article>
+          <article class="skill-card">
+            <h3>Android Application Development</h3>
+            <div class="tag-list">
+              <span>Java</span>
+              <span>Android SDK</span>
+              <span>XML Layout Design</span>
+              <span>Material Design</span>
+              <span>SQLite</span>
+              <span>Google Play Console</span>
+            </div>
+            <p class="card-text" style="margin-top: 1rem;">Built and published Android applications for scanning, PDF management, QR/barcode tools, multiplayer games, and competitive exam preparation.</p>
+            <ul>
+              <li><a href="https://play.google.com/store/apps/details?id=com.scanguru" target="_blank" rel="noopener noreferrer">Scan Guru</a> — document scanning and OCR utility</li>
+              <li><a href="https://play.google.com/store/apps/details?id=com.sukhsadh.pdfguru" target="_blank" rel="noopener noreferrer">PDF Guru</a> — PDF creation, editing, and management</li>
+              <li><a href="https://play.google.com/store/apps/details?id=com.qrguru" target="_blank" rel="noopener noreferrer">QR Guru</a> — barcode and QR code generator/scanner</li>
+              <li><a href="https://play.google.com/store/apps/details?id=me.glitch.tictactoe" target="_blank" rel="noopener noreferrer">Tic Tac Toe</a> — online/offline multiplayer game</li>
+              <li><a href="https://play.google.com/store/apps/details?id=com.iibfbcexam" target="_blank" rel="noopener noreferrer">IIBF BC Exam Preparation</a></li>
+              <li><a href="https://play.google.com/store/apps/details?id=org.thegreenthinkersacademy" target="_blank" rel="noopener noreferrer">The Green Thinkers Academy</a></li>
+              <li><a href="https://play.google.com/store/apps/details?id=com.banasahayak" target="_blank" rel="noopener noreferrer">Bana Sahayak Preparation</a></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section container" id="skills" data-theme="tech">
         <div class="section-heading">
           <h2>Skills & Expertise</h2>
-          <p>Technical skills in materials synthesis, characterization, instrumentation, programming, and scientific computing.</p>
+          <p>Technical skills in materials synthesis, characterization, instrumentation, programming, scientific computing, and academic development.</p>
         </div>
         <div class="grid-2">
           <article class="skill-card">
@@ -550,16 +751,21 @@
           <article class="skill-card">
             <h3>Characterization Instruments</h3>
             <div class="tag-list">
-              <span>X-ray Diffractometer (XRD)</span>
+              <span>Bruker XRD</span>
+              <span>SEM</span>
               <span>FESEM</span>
-              <span>VSM</span>
-              <span>PPMS</span>
-              <span>PE Loop Tracer</span>
-              <span>Impedance Analyzer</span>
-              <span>UV-Vis Spectrophotometer</span>
-              <span>FTIR Spectroscopy</span>
-              <span>Mössbauer Spectrometer</span>
-              <span>TGA / DTA</span>
+              <span>EDAX / EDS</span>
+              <span>TEM</span>
+              <span>Quantum Design VersaLab VSM</span>
+              <span>Quantum Design Dynacool PPMS</span>
+              <span>Tektronix P-E Loop Tracer</span>
+              <span>Keithley SourceMeter J-E Setup</span>
+              <span>Hioki LCR Meter</span>
+              <span>Metis B-H Loop Tracer</span>
+              <span>Vector Network Analyzer</span>
+              <span>TGA-DSC</span>
+              <span>Mössbauer Spectroscopy</span>
+              <span>Thermoline Furnace</span>
             </div>
           </article>
           <article class="skill-card">
@@ -581,7 +787,7 @@
             <h3>Programming & Development</h3>
             <div class="tag-list">
               <span>LabView</span>
-              <span>C / C++</span>
+              <span>C</span>
               <span>Java</span>
               <span>JavaScript</span>
               <span>Python</span>
@@ -602,7 +808,7 @@
         </div>
       </section>
 
-      <section class="section container" id="contact">
+      <section class="section container" id="contact" data-theme="tech">
         <div class="section-heading">
           <h2>Contact</h2>
           <p>Reach out for research collaborations, academic inquiries, or general questions.</p>
@@ -621,6 +827,19 @@
             <div class="contact-item">
               <strong>Address</strong>
               <address>Noapara, Chandannagar<br />Hooghly, West Bengal<br />India — 712138</address>
+            </div>
+            <div class="contact-item">
+              <strong>Personal Details</strong>
+              <address>
+                Father: Mr. Nakul Sadhukhan<br />
+                Mother: Mrs. Mira Sadhukhan<br />
+                DOB: 05 February 1994<br />
+                Gender: Male<br />
+                Nationality: Indian<br />
+                Religion: Hindu<br />
+                Marital Status: Single<br />
+                Languages: Bengali, English, Hindi
+              </address>
             </div>
             <div class="contact-item">
               <strong>Research Profiles</strong>

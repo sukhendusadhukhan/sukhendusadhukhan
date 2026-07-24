@@ -5,6 +5,39 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');
 
+  const revealTargets = Array.from(document.querySelectorAll('.hero-copy, .hero-panel, .section, .panel-card, .contact-card, .skill-card, .timeline-card, .info-card, .award-card, .publication-card, .conference-card, .net-card, .language-card, .profile-card'));
+
+  revealTargets.forEach(function (element, index) {
+    element.classList.add('reveal');
+    element.style.transitionDelay = `${Math.min(index * 55, 280)}ms`;
+  });
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    revealTargets.forEach(function (element) {
+      revealObserver.observe(element);
+    });
+  } else {
+    revealTargets.forEach(function (element) {
+      element.classList.add('is-visible');
+    });
+  }
+
+  const loader = document.getElementById('page-loader');
+  if (loader) {
+    window.setTimeout(function () {
+      loader.classList.add('is-hidden');
+    }, 900);
+  }
+
   const routeMap = {
     home: '/',
     experience: '/experience',
@@ -44,6 +77,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }) || null;
   }
 
+  function updateUrlForSection(sectionId) {
+    const normalizedSection = (sectionId || 'home').replace(/^#/, '');
+    const nextPath = routeMap[normalizedSection] || '/';
+    const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+    if (currentPath !== nextPath) {
+      history.replaceState({ section: normalizedSection }, '', nextPath);
+    }
+  }
+
   function scrollToSection(sectionId, shouldUpdateUrl) {
     const normalizedSection = (sectionId || 'home').replace(/^#/, '');
     const target = document.getElementById(normalizedSection);
@@ -55,11 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (shouldUpdateUrl) {
-      const nextPath = routeMap[normalizedSection] || '/';
-      const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
-      if (currentPath !== nextPath) {
-        history.pushState({ section: normalizedSection }, '', nextPath);
-      }
+      updateUrlForSection(normalizedSection);
     }
   }
 
@@ -77,6 +115,37 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
+  let scrollTimer = null;
+
+  function detectActiveSection() {
+    const sections = ['home', 'experience', 'education', 'publications', 'awards', 'conferences', 'skills', 'contact'];
+    const scrollPosition = window.scrollY + 140;
+
+    for (let index = sections.length - 1; index >= 0; index -= 1) {
+      const sectionId = sections[index];
+      const target = document.getElementById(sectionId);
+      if (!target) {
+        continue;
+      }
+
+      const sectionTop = target.offsetTop;
+      if (scrollPosition >= sectionTop) {
+        updateUrlForSection(sectionId);
+        return;
+      }
+    }
+
+    updateUrlForSection('home');
+  }
+
+  window.addEventListener('scroll', function () {
+    if (scrollTimer) {
+      window.clearTimeout(scrollTimer);
+    }
+
+    scrollTimer = window.setTimeout(detectActiveSection, 80);
+  }, { passive: true });
 
   window.addEventListener('popstate', function () {
     const sectionId = getSectionIdFromLocation();
