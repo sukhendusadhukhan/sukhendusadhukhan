@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Arduino IoT Dashboard</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #1e293b
+        );
+
+    color: white;
+
+    min-height: 100vh;
+}
+
+
+.container {
+
+    max-width: 500px;
+
+    margin: auto;
+
+    padding: 20px;
+}
+
+
+.header {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 28px;
+}
+
+
+.header p {
+
+    margin-top: 8px;
+
+    color: #94a3b8;
+}
+
+
+.card {
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    border-radius: 20px;
+
+    padding: 22px;
+
+    margin-bottom: 18px;
+
+    backdrop-filter:
+        blur(10px);
+}
+
+
+.card-title {
+
+    color: #94a3b8;
+
+    font-size: 15px;
+
+    margin-bottom: 10px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        1px;
+}
+
+
+.distance {
+
+    text-align: center;
+
+    font-size: 58px;
+
+    font-weight: bold;
+
+    margin: 15px 0 0 0;
+}
+
+
+.unit {
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 18px;
+}
+
+
+.status-row {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    padding: 14px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+
+.status-row:last-child {
+
+    border-bottom: none;
+}
+
+
+.status-name {
+
+    font-size: 17px;
+}
+
+
+.status-value {
+
+    font-weight: bold;
+
+    font-size: 17px;
+}
+
+
+.on {
+
+    color: #22c55e;
+}
+
+
+.off {
+
+    color: #64748b;
+}
+
+
+.servo {
+
+    color: #38bdf8;
+}
+
+
+.online {
+
+    text-align: center;
+
+    color: #22c55e;
+
+    font-weight: bold;
+
+    margin-top: 10px;
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            🤖 Arduino IoT
+        </h1>
+
+        <p>
+            UNO R4 WiFi • Firebase
+        </p>
+
+    </div>
+
+
+    <!-- DISTANCE -->
+
+    <div class="card">
+
+        <div class="card-title">
+            Ultrasonic Distance
+        </div>
+
+        <div class="distance">
+
+            <span id="distance">
+                --
+            </span>
+
+        </div>
+
+        <div class="unit">
+            centimetres
+        </div>
+
+    </div>
+
+
+    <!-- OUTPUT STATUS -->
+
+    <div class="card">
+
+        <div class="card-title">
+            Hardware Status
+        </div>
+
+
+        <div class="status-row">
+
+            <div class="status-name">
+                🔴 Red LED
+            </div>
+
+            <div
+                id="redLED"
+                class="status-value">
+
+                --
+
+            </div>
+
+        </div>
+
+
+        <div class="status-row">
+
+            <div class="status-name">
+                🟢 Green LED
+            </div>
+
+            <div
+                id="greenLED"
+                class="status-value">
+
+                --
+
+            </div>
+
+        </div>
+
+
+        <div class="status-row">
+
+            <div class="status-name">
+                ⚙️ Servo
+            </div>
+
+            <div
+                id="servo"
+                class="status-value servo">
+
+                --°
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONNECTION -->
+
+    <div class="card">
+
+        <div class="card-title">
+            Cloud Connection
+        </div>
+
+        <div
+            id="connection"
+            class="online">
+
+            ● CONNECTING...
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- FIREBASE -->
+<!-- ================================================= -->
+
+<script type="module">
+
+
+// -----------------------------------------------------
+// Firebase SDK
+// -----------------------------------------------------
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
+import {
+    getDatabase,
+    ref,
+    onValue
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+
+
+// -----------------------------------------------------
+// Firebase configuration
+// -----------------------------------------------------
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyDDpj3yMSQp-qXpxovh2SDSnhqHT68-Y0k",
+
+    authDomain:
+        "fir-c5299.firebaseapp.com",
+
+    databaseURL:
+        "https://fir-c5299.firebaseio.com",
+
+    projectId:
+        "fir-c5299",
+
+    storageBucket:
+        "fir-c5299.appspot.com",
+
+    messagingSenderId:
+        "112949129990",
+
+    appId:
+        "1:112949129990:web:4a2ba9d13b0260c23be487",
+
+    measurementId:
+        "G-JYQV2VPZXT"
+};
+
+
+// -----------------------------------------------------
+// Initialize Firebase
+// -----------------------------------------------------
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+// -----------------------------------------------------
+// Realtime Database
+// -----------------------------------------------------
+
+const db =
+    getDatabase(app);
+
+
+// =====================================================
+// DISTANCE
+// =====================================================
+
+const distanceRef =
+    ref(
+        db,
+        "Arduino/sensor/distance"
+    );
+
+
+onValue(
+    distanceRef,
+    (snapshot) => {
+
+        const value =
+            snapshot.val();
+
+        if (value !== null) {
+
+            document
+                .getElementById("distance")
+                .innerText =
+                Number(value)
+                .toFixed(2);
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// RED LED
+// =====================================================
+
+const redRef =
+    ref(
+        db,
+        "Arduino/output/redLED"
+    );
+
+
+onValue(
+    redRef,
+    (snapshot) => {
+
+        const value =
+            snapshot.val();
+
+        const element =
+            document
+                .getElementById("redLED");
+
+
+        element.innerText =
+            value ? "ON" : "OFF";
+
+
+        element.className =
+            value
+                ? "status-value on"
+                : "status-value off";
+
+    }
+);
+
+
+// =====================================================
+// GREEN LED
+// =====================================================
+
+const greenRef =
+    ref(
+        db,
+        "Arduino/output/greenLED"
+    );
+
+
+onValue(
+    greenRef,
+    (snapshot) => {
+
+        const value =
+            snapshot.val();
+
+        const element =
+            document
+                .getElementById("greenLED");
+
+
+        element.innerText =
+            value ? "ON" : "OFF";
+
+
+        element.className =
+            value
+                ? "status-value on"
+                : "status-value off";
+
+    }
+);
+
+
+// =====================================================
+// SERVO
+// =====================================================
+
+const servoRef =
+    ref(
+        db,
+        "Arduino/output/servo"
+    );
+
+
+onValue(
+    servoRef,
+    (snapshot) => {
+
+        const value =
+            snapshot.val();
+
+        document
+            .getElementById("servo")
+            .innerText =
+            value + "°";
+
+    }
+);
+
+
+// =====================================================
+// FIREBASE CONNECTION STATUS
+// =====================================================
+
+const connectedRef =
+    ref(
+        db,
+        ".info/connected"
+    );
+
+
+onValue(
+    connectedRef,
+    (snapshot) => {
+
+        const connected =
+            snapshot.val();
+
+        const element =
+            document
+                .getElementById("connection");
+
+
+        if (connected) {
+
+            element.innerText =
+                "● LIVE — CONNECTED";
+
+            element.style.color =
+                "#22c55e";
+
+        }
+
+        else {
+
+            element.innerText =
+                "● OFFLINE";
+
+            element.style.color =
+                "#ef4444";
+
+        }
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
