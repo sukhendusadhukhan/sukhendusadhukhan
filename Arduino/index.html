@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -9,193 +8,279 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>Arduino IoT Dashboard</title>
-
+<title>IEM Arduino IoT Dashboard</title>
 
 <style>
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 
 body {
 
-    margin: 0;
+  margin: 0;
 
-    font-family: Arial, sans-serif;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
-    background:
-        linear-gradient(
-            135deg,
-            #0f172a,
-            #1e293b
-        );
+  background:
+    linear-gradient(
+      135deg,
+      #101820,
+      #182b3a
+    );
 
-    color: white;
+  color: white;
 
-    min-height: 100vh;
+  min-height: 100vh;
+
+  padding: 20px;
 }
-
 
 .container {
 
-    max-width: 500px;
+  max-width: 900px;
 
-    margin: auto;
-
-    padding: 20px;
+  margin: auto;
 }
 
+h1 {
 
-.header {
+  text-align: center;
 
-    text-align: center;
-
-    margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 
+.subtitle {
 
-.header h1 {
+  text-align: center;
 
-    margin: 0;
+  opacity: 0.7;
 
-    font-size: 28px;
+  margin-bottom: 25px;
 }
 
+/* SENSOR GRID */
 
-.header p {
+.sensor-grid {
 
-    margin-top: 8px;
+  display: grid;
 
-    color: #94a3b8;
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 15px;
+
+  margin-bottom: 20px;
 }
 
+.sensor {
 
-.card {
+  background: #1e3344;
 
-    background:
-        rgba(255,255,255,0.08);
+  border-radius: 15px;
 
-    border:
-        1px solid
-        rgba(255,255,255,0.1);
+  padding: 20px;
 
-    border-radius: 20px;
+  text-align: center;
 
-    padding: 22px;
-
-    margin-bottom: 18px;
-
-    backdrop-filter:
-        blur(10px);
+  box-shadow:
+    0 5px 20px
+    rgba(0,0,0,0.3);
 }
 
+.sensor-title {
 
-.card-title {
+  font-size: 15px;
 
-    color: #94a3b8;
+  opacity: 0.7;
 
-    font-size: 15px;
-
-    margin-bottom: 10px;
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        1px;
+  margin-bottom: 10px;
 }
 
+.sensor-value {
 
-.distance {
+  font-size: 32px;
 
-    text-align: center;
-
-    font-size: 58px;
-
-    font-weight: bold;
-
-    margin: 15px 0 0 0;
+  font-weight: bold;
 }
-
 
 .unit {
 
-    text-align: center;
+  font-size: 15px;
 
-    color: #94a3b8;
-
-    font-size: 18px;
+  opacity: 0.7;
 }
 
+/* CONTROL */
 
-.status-row {
+.panel {
 
-    display: flex;
+  background: #1e3344;
 
-    justify-content:
-        space-between;
+  border-radius: 15px;
 
-    align-items: center;
+  padding: 25px;
 
-    padding: 14px 0;
+  margin-top: 20px;
 
-    border-bottom:
-        1px solid
-        rgba(255,255,255,0.08);
+  box-shadow:
+    0 5px 20px
+    rgba(0,0,0,0.3);
 }
 
+.panel h2 {
 
-.status-row:last-child {
+  margin-top: 0;
 
-    border-bottom: none;
+  text-align: center;
 }
 
+/* SWITCH */
 
-.status-name {
+.control-row {
 
-    font-size: 17px;
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 15px 0;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,0.1);
 }
 
+.switch {
 
-.status-value {
+  position: relative;
 
-    font-weight: bold;
+  width: 60px;
 
-    font-size: 17px;
+  height: 32px;
 }
 
+.switch input {
 
-.on {
-
-    color: #22c55e;
+  display: none;
 }
 
+.slider {
 
-.off {
+  position: absolute;
 
-    color: #64748b;
+  cursor: pointer;
+
+  inset: 0;
+
+  background: #555;
+
+  border-radius: 30px;
+
+  transition: 0.2s;
 }
 
+.slider:before {
 
-.servo {
+  content: "";
 
-    color: #38bdf8;
+  position: absolute;
+
+  width: 24px;
+
+  height: 24px;
+
+  left: 4px;
+
+  top: 4px;
+
+  background: white;
+
+  border-radius: 50%;
+
+  transition: 0.2s;
 }
 
+input:checked + .slider {
 
-.online {
-
-    text-align: center;
-
-    color: #22c55e;
-
-    font-weight: bold;
-
-    margin-top: 10px;
+  background: #2196f3;
 }
 
+input:checked + .slider:before {
+
+  transform:
+    translateX(28px);
+}
+
+/* SERVO */
+
+.servo-value {
+
+  text-align: center;
+
+  font-size: 28px;
+
+  margin: 15px;
+}
+
+input[type="range"] {
+
+  width: 100%;
+}
+
+button {
+
+  display: block;
+
+  margin: 15px auto 0;
+
+  padding: 12px 35px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #2196f3;
+
+  color: white;
+
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+button:active {
+
+  transform: scale(0.97);
+}
+
+/* STATUS */
+
+.status {
+
+  text-align: center;
+
+  margin-top: 20px;
+
+  font-size: 14px;
+
+  opacity: 0.7;
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+
+  .sensor-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+}
 
 </style>
 
@@ -204,388 +289,387 @@ body {
 
 <body>
 
-
 <div class="container">
 
+<h1>
+IEM Arduino UNO R4 WiFi
+</h1>
 
-    <!-- HEADER -->
-
-    <div class="header">
-
-        <h1>
-            🤖 Arduino IoT
-        </h1>
-
-        <p>
-            UNO R4 WiFi • Firebase
-        </p>
-
-    </div>
+<div class="subtitle">
+Smart Local IoT Dashboard
+</div>
 
 
-    <!-- DISTANCE -->
+<!-- ================= SENSOR DATA ================= -->
 
-    <div class="card">
-
-        <div class="card-title">
-            Ultrasonic Distance
-        </div>
-
-        <div class="distance">
-
-            <span id="distance">
-                --
-            </span>
-
-        </div>
-
-        <div class="unit">
-            centimetres
-        </div>
-
-    </div>
+<div class="sensor-grid">
 
 
-    <!-- OUTPUT STATUS -->
+<div class="sensor">
 
-    <div class="card">
+<div class="sensor-title">
+🌡 TEMPERATURE
+</div>
 
-        <div class="card-title">
-            Hardware Status
-        </div>
+<div class="sensor-value"
+     id="temperature">
 
+--.-
 
-        <div class="status-row">
+</div>
 
-            <div class="status-name">
-                🔴 Red LED
-            </div>
-
-            <div
-                id="redLED"
-                class="status-value">
-
-                --
-
-            </div>
-
-        </div>
-
-
-        <div class="status-row">
-
-            <div class="status-name">
-                🟢 Green LED
-            </div>
-
-            <div
-                id="greenLED"
-                class="status-value">
-
-                --
-
-            </div>
-
-        </div>
-
-
-        <div class="status-row">
-
-            <div class="status-name">
-                ⚙️ Servo
-            </div>
-
-            <div
-                id="servo"
-                class="status-value servo">
-
-                --°
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- CONNECTION -->
-
-    <div class="card">
-
-        <div class="card-title">
-            Cloud Connection
-        </div>
-
-        <div
-            id="connection"
-            class="online">
-
-            ● CONNECTING...
-
-        </div>
-
-    </div>
-
+<div class="unit">
+°C
+</div>
 
 </div>
 
 
+<div class="sensor">
 
-<!-- ================================================= -->
-<!-- FIREBASE -->
-<!-- ================================================= -->
+<div class="sensor-title">
+💧 HUMIDITY
+</div>
 
-<script type="module">
+<div class="sensor-value"
+     id="humidity">
 
+--.-
 
-// -----------------------------------------------------
-// Firebase SDK
-// -----------------------------------------------------
+</div>
 
-import {
-    initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+<div class="unit">
+%
+</div>
 
-
-import {
-    getDatabase,
-    ref,
-    onValue
-}
-from
-"https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+</div>
 
 
-// -----------------------------------------------------
-// Firebase configuration
-// -----------------------------------------------------
+<div class="sensor">
 
-const firebaseConfig = {
+<div class="sensor-title">
+📏 DISTANCE
+</div>
 
-    apiKey:
-        "AIzaSyDDpj3yMSQp-qXpxovh2SDSnhqHT68-Y0k",
+<div class="sensor-value"
+     id="distance">
 
-    authDomain:
-        "fir-c5299.firebaseapp.com",
+--.-
 
-    databaseURL:
-        "https://fir-c5299.firebaseio.com",
+</div>
 
-    projectId:
-        "fir-c5299",
+<div class="unit">
+cm
+</div>
 
-    storageBucket:
-        "fir-c5299.appspot.com",
+</div>
 
-    messagingSenderId:
-        "112949129990",
-
-    appId:
-        "1:112949129990:web:4a2ba9d13b0260c23be487",
-
-    measurementId:
-        "G-JYQV2VPZXT"
-};
+</div>
 
 
-// -----------------------------------------------------
-// Initialize Firebase
-// -----------------------------------------------------
+<!-- ================= LED CONTROL ================= -->
 
-const app =
-    initializeApp(firebaseConfig);
+<div class="panel">
+
+<h2>
+💡 LED CONTROL
+</h2>
 
 
-// -----------------------------------------------------
-// Realtime Database
-// -----------------------------------------------------
+<div class="control-row">
 
-const db =
-    getDatabase(app);
+<span>
+🔴 Red LED
+</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="redSwitch"
+onchange="setRed(this.checked)"
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+<div class="control-row">
+
+<span>
+🟢 Green LED
+</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="greenSwitch"
+onchange="setGreen(this.checked)"
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+
+<!-- ================= SERVO ================= -->
+
+<div class="panel">
+
+<h2>
+⚙️ SERVO CONTROL
+</h2>
+
+<div class="servo-value">
+
+<span id="servoAngle">
+0
+</span>°
+
+</div>
+
+<input
+type="range"
+id="servoSlider"
+min="0"
+max="180"
+value="0"
+oninput="showServoAngle()"
+>
+
+<button onclick="setServo()">
+
+SET SERVO ANGLE
+
+</button>
+
+</div>
+
+
+<div class="status"
+     id="status">
+
+Connecting to Arduino...
+
+</div>
+
+</div>
+
+
+<script>
 
 
 // =====================================================
-// DISTANCE
+// ARDUINO ADDRESS
 // =====================================================
 
-const distanceRef =
-    ref(
-        db,
-        "Arduino/sensor/distance"
-    );
+const ARDUINO =
+"http://192.168.1.4";
 
 
-onValue(
-    distanceRef,
-    (snapshot) => {
+// =====================================================
+// SENSOR DATA
+// =====================================================
 
-        const value =
-            snapshot.val();
+async function updateSensors()
+{
 
-        if (value !== null) {
+  try {
 
-            document
-                .getElementById("distance")
-                .innerText =
-                Number(value)
-                .toFixed(2);
-
+    const response =
+      await fetch(
+        ARDUINO + "/sensors",
+        {
+          cache: "no-store"
         }
+      );
 
-    }
-);
+    const data =
+      await response.json();
+
+
+    document.getElementById(
+      "temperature"
+    ).textContent =
+      data.temperature.toFixed(1);
+
+
+    document.getElementById(
+      "humidity"
+    ).textContent =
+      data.humidity.toFixed(1);
+
+
+    document.getElementById(
+      "distance"
+    ).textContent =
+      data.distance.toFixed(1);
+
+
+    document.getElementById(
+      "status"
+    ).textContent =
+      "● Arduino connected";
+
+  }
+
+  catch(error) {
+
+    document.getElementById(
+      "status"
+    ).textContent =
+      "● Arduino disconnected";
+
+  }
+
+}
 
 
 // =====================================================
 // RED LED
 // =====================================================
 
-const redRef =
-    ref(
-        db,
-        "Arduino/output/redLED"
+async function setRed(state)
+{
+
+  const command =
+    state
+    ? "/red/on"
+    : "/red/off";
+
+  try {
+
+    await fetch(
+      ARDUINO + command,
+      {
+        cache: "no-store"
+      }
     );
 
+  }
 
-onValue(
-    redRef,
-    (snapshot) => {
+  catch(error) {
 
-        const value =
-            snapshot.val();
+    console.log(error);
 
-        const element =
-            document
-                .getElementById("redLED");
+  }
 
-
-        element.innerText =
-            value ? "ON" : "OFF";
-
-
-        element.className =
-            value
-                ? "status-value on"
-                : "status-value off";
-
-    }
-);
+}
 
 
 // =====================================================
 // GREEN LED
 // =====================================================
 
-const greenRef =
-    ref(
-        db,
-        "Arduino/output/greenLED"
+async function setGreen(state)
+{
+
+  const command =
+    state
+    ? "/green/on"
+    : "/green/off";
+
+  try {
+
+    await fetch(
+      ARDUINO + command,
+      {
+        cache: "no-store"
+      }
     );
 
+  }
 
-onValue(
-    greenRef,
-    (snapshot) => {
+  catch(error) {
 
-        const value =
-            snapshot.val();
+    console.log(error);
 
-        const element =
-            document
-                .getElementById("greenLED");
+  }
+
+}
 
 
-        element.innerText =
-            value ? "ON" : "OFF";
+// =====================================================
+// SERVO DISPLAY
+// =====================================================
+
+function showServoAngle()
+{
+
+  const angle =
+    document.getElementById(
+      "servoSlider"
+    ).value;
+
+  document.getElementById(
+    "servoAngle"
+  ).textContent =
+    angle;
+
+}
 
 
-        element.className =
-            value
-                ? "status-value on"
-                : "status-value off";
+// =====================================================
+// SET SERVO
+// =====================================================
 
-    }
+async function setServo()
+{
+
+  const angle =
+    document.getElementById(
+      "servoSlider"
+    ).value;
+
+
+  try {
+
+    await fetch(
+      ARDUINO +
+      "/servo?angle=" +
+      angle,
+      {
+        cache: "no-store"
+      }
+    );
+
+  }
+
+  catch(error) {
+
+    console.log(error);
+
+  }
+
+}
+
+
+// =====================================================
+// LIVE SENSOR UPDATE
+// =====================================================
+
+// Only SENSOR information is polled.
+// LED and SERVO controls are NEVER touched here.
+
+setInterval(
+  updateSensors,
+  300
 );
 
 
-// =====================================================
-// SERVO
-// =====================================================
+// Initial reading
 
-const servoRef =
-    ref(
-        db,
-        "Arduino/output/servo"
-    );
-
-
-onValue(
-    servoRef,
-    (snapshot) => {
-
-        const value =
-            snapshot.val();
-
-        document
-            .getElementById("servo")
-            .innerText =
-            value + "°";
-
-    }
-);
-
-
-// =====================================================
-// FIREBASE CONNECTION STATUS
-// =====================================================
-
-const connectedRef =
-    ref(
-        db,
-        ".info/connected"
-    );
-
-
-onValue(
-    connectedRef,
-    (snapshot) => {
-
-        const connected =
-            snapshot.val();
-
-        const element =
-            document
-                .getElementById("connection");
-
-
-        if (connected) {
-
-            element.innerText =
-                "● LIVE — CONNECTED";
-
-            element.style.color =
-                "#22c55e";
-
-        }
-
-        else {
-
-            element.innerText =
-                "● OFFLINE";
-
-            element.style.color =
-                "#ef4444";
-
-        }
-
-    }
-);
-
+updateSensors();
 
 </script>
-
 
 </body>
 

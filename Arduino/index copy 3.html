@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>IEM Arduino Local Control</title>
+
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+
+  margin: 0;
+
+  min-height: 100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #1e293b
+    );
+
+  color: white;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 20px;
+
+}
+
+
+.container {
+
+  width: 100%;
+
+  max-width: 500px;
+
+}
+
+
+.header {
+
+  text-align: center;
+
+  margin-bottom: 20px;
+
+}
+
+
+.header h1 {
+
+  margin: 0;
+
+  font-size: 28px;
+
+}
+
+
+.header p {
+
+  margin: 8px 0;
+
+  color: #cbd5e1;
+
+}
+
+
+.connection {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 7px 14px;
+
+  border-radius: 20px;
+
+  background: #334155;
+
+  font-size: 13px;
+
+}
+
+
+.dot {
+
+  width: 9px;
+
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #ef4444;
+
+}
+
+
+.dot.connected {
+
+  background: #22c55e;
+
+}
+
+
+.card {
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.08
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.12
+    );
+
+  border-radius: 20px;
+
+  padding: 22px;
+
+  margin-bottom: 16px;
+
+}
+
+
+.title {
+
+  font-size: 19px;
+
+  font-weight: bold;
+
+  margin-bottom: 18px;
+
+}
+
+
+/* =====================================================
+   LED
+   ===================================================== */
+
+.led-row {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 16px 0;
+
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.1
+    );
+
+}
+
+
+.led-row:last-child {
+
+  border-bottom: none;
+
+}
+
+
+.led-name {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  font-size: 17px;
+
+}
+
+
+.led-icon {
+
+  font-size: 25px;
+
+}
+
+
+/* =====================================================
+   TOGGLE
+   ===================================================== */
+
+.switch {
+
+  position: relative;
+
+  width: 58px;
+
+  height: 32px;
+
+}
+
+
+.switch input {
+
+  display: none;
+
+}
+
+
+.slider {
+
+  position: absolute;
+
+  inset: 0;
+
+  background: #475569;
+
+  border-radius: 30px;
+
+  cursor: pointer;
+
+  transition: 0.15s;
+
+}
+
+
+.slider::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 24px;
+
+  height: 24px;
+
+  left: 4px;
+
+  top: 4px;
+
+  background: white;
+
+  border-radius: 50%;
+
+  transition: 0.15s;
+
+}
+
+
+input:checked + .slider {
+
+  background: #22c55e;
+
+}
+
+
+input:checked + .slider::before {
+
+  transform:
+    translateX(26px);
+
+}
+
+
+/* =====================================================
+   SERVO
+   ===================================================== */
+
+.servo-value {
+
+  text-align: center;
+
+  font-size: 45px;
+
+  font-weight: bold;
+
+  margin: 15px 0 20px;
+
+}
+
+
+.servo-value span {
+
+  font-size: 20px;
+
+  color: #cbd5e1;
+
+}
+
+
+input[type="range"] {
+
+  width: 100%;
+
+  cursor: pointer;
+
+}
+
+
+.range-labels {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  font-size: 12px;
+
+  color: #94a3b8;
+
+  margin-top: 8px;
+
+}
+
+
+.set-button {
+
+  width: 100%;
+
+  padding: 15px;
+
+  margin-top: 22px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #2563eb;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+}
+
+
+.set-button:active {
+
+  transform: scale(0.98);
+
+}
+
+
+/* =====================================================
+   STATE
+   ===================================================== */
+
+.state-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+}
+
+
+.state {
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      0.2
+    );
+
+  border-radius: 12px;
+
+  padding: 14px 5px;
+
+  text-align: center;
+
+}
+
+
+.state-label {
+
+  font-size: 11px;
+
+  color: #94a3b8;
+
+  margin-bottom: 6px;
+
+}
+
+
+.state-value {
+
+  font-size: 15px;
+
+  font-weight: bold;
+
+}
+
+
+.footer {
+
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 11px;
+
+  margin-top: 20px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <!-- HEADER -->
+
+  <div class="header">
+
+    <h1>
+      IEM Arduino Control
+    </h1>
+
+    <p>
+      Local Wi-Fi Hardware Controller
+    </p>
+
+
+    <div class="connection">
+
+      <span
+        id="dot"
+        class="dot">
+      </span>
+
+      <span id="connection">
+        Connecting...
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- LED CARD -->
+
+  <div class="card">
+
+    <div class="title">
+      💡 LED Control
+    </div>
+
+
+    <!-- RED -->
+
+    <div class="led-row">
+
+      <div class="led-name">
+
+        <span class="led-icon">
+          🔴
+        </span>
+
+        <span>
+          Red LED
+        </span>
+
+      </div>
+
+
+      <label class="switch">
+
+        <input
+          type="checkbox"
+          id="red"
+        >
+
+        <span class="slider"></span>
+
+      </label>
+
+    </div>
+
+
+    <!-- GREEN -->
+
+    <div class="led-row">
+
+      <div class="led-name">
+
+        <span class="led-icon">
+          🟢
+        </span>
+
+        <span>
+          Green LED
+        </span>
+
+      </div>
+
+
+      <label class="switch">
+
+        <input
+          type="checkbox"
+          id="green"
+        >
+
+        <span class="slider"></span>
+
+      </label>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- SERVO CARD -->
+
+  <div class="card">
+
+    <div class="title">
+      ⚙️ Servo Motor
+    </div>
+
+
+    <div
+      class="servo-value"
+      id="servoValue"
+    >
+      0<span>°</span>
+    </div>
+
+
+    <input
+      type="range"
+      id="servoSlider"
+      min="0"
+      max="180"
+      value="0"
+    >
+
+
+    <div class="range-labels">
+
+      <span>0°</span>
+
+      <span>90°</span>
+
+      <span>180°</span>
+
+    </div>
+
+
+    <button
+      class="set-button"
+      id="setServo"
+    >
+      SET SERVO ANGLE
+    </button>
+
+  </div>
+
+
+
+  <!-- STATE -->
+
+  <div class="card">
+
+    <div class="title">
+      📡 Arduino State
+    </div>
+
+
+    <div class="state-grid">
+
+
+      <div class="state">
+
+        <div class="state-label">
+          RED
+        </div>
+
+        <div
+          class="state-value"
+          id="redState"
+        >
+          OFF
+        </div>
+
+      </div>
+
+
+      <div class="state">
+
+        <div class="state-label">
+          GREEN
+        </div>
+
+        <div
+          class="state-value"
+          id="greenState"
+        >
+          OFF
+        </div>
+
+      </div>
+
+
+      <div class="state">
+
+        <div class="state-label">
+          SERVO
+        </div>
+
+        <div
+          class="state-value"
+          id="servoState"
+        >
+          0°
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+
+    IIFR Lab • IEM
+
+  </div>
+
+
+</div>
+
+
+<script>
+
+
+// =====================================================
+// ARDUINO IP
+// =====================================================
+
+const ARDUINO =
+  "http://192.168.1.4";
+
+
+// =====================================================
+// ELEMENTS
+// =====================================================
+
+const red =
+  document.getElementById(
+    "red"
+  );
+
+
+const green =
+  document.getElementById(
+    "green"
+  );
+
+
+const servoSlider =
+  document.getElementById(
+    "servoSlider"
+  );
+
+
+const servoValue =
+  document.getElementById(
+    "servoValue"
+  );
+
+
+const setServo =
+  document.getElementById(
+    "setServo"
+  );
+
+
+const redState =
+  document.getElementById(
+    "redState"
+  );
+
+
+const greenState =
+  document.getElementById(
+    "greenState"
+  );
+
+
+const servoState =
+  document.getElementById(
+    "servoState"
+  );
+
+
+const dot =
+  document.getElementById(
+    "dot"
+  );
+
+
+const connection =
+  document.getElementById(
+    "connection"
+  );
+
+
+// =====================================================
+// UPDATE CONNECTION STATUS
+// =====================================================
+
+function connected()
+{
+
+  dot.className =
+    "dot connected";
+
+  connection.textContent =
+    "Arduino Connected";
+
+}
+
+
+function disconnected()
+{
+
+  dot.className =
+    "dot";
+
+  connection.textContent =
+    "Arduino Disconnected";
+
+}
+
+
+// =====================================================
+// GET CURRENT STATE
+// =====================================================
+
+async function updateState()
+{
+
+  try
+  {
+
+    const response =
+      await fetch(
+        ARDUINO + "/state",
+        {
+          cache: "no-store"
+        }
+      );
+
+
+    if (!response.ok)
+      throw new Error();
+
+
+    const data =
+      await response.json();
+
+
+    // -----------------------------------------------
+    // RED
+    // -----------------------------------------------
+
+    red.checked =
+      data.redLED;
+
+    redState.textContent =
+      data.redLED
+      ? "ON"
+      : "OFF";
+
+
+    // -----------------------------------------------
+    // GREEN
+    // -----------------------------------------------
+
+    green.checked =
+      data.greenLED;
+
+    greenState.textContent =
+      data.greenLED
+      ? "ON"
+      : "OFF";
+
+
+    // -----------------------------------------------
+    // SERVO
+    // -----------------------------------------------
+
+    servoSlider.value =
+      data.servo;
+
+
+    servoValue.innerHTML =
+      data.servo +
+      "<span>°</span>";
+
+
+    servoState.textContent =
+      data.servo + "°";
+
+
+    connected();
+
+  }
+
+  catch (error)
+  {
+
+    disconnected();
+
+  }
+
+}
+
+
+// =====================================================
+// RED LED
+// =====================================================
+
+red.addEventListener(
+  "change",
+  async () =>
+  {
+
+    const state =
+      red.checked
+      ? "on"
+      : "off";
+
+
+    try
+    {
+
+      await fetch(
+        ARDUINO +
+        "/red/" +
+        state
+      );
+
+
+      await updateState();
+
+    }
+
+    catch (error)
+    {
+
+      disconnected();
+
+    }
+
+  }
+);
+
+
+// =====================================================
+// GREEN LED
+// =====================================================
+
+green.addEventListener(
+  "change",
+  async () =>
+  {
+
+    const state =
+      green.checked
+      ? "on"
+      : "off";
+
+
+    try
+    {
+
+      await fetch(
+        ARDUINO +
+        "/green/" +
+        state
+      );
+
+
+      await updateState();
+
+    }
+
+    catch (error)
+    {
+
+      disconnected();
+
+    }
+
+  }
+);
+
+
+// =====================================================
+// SERVO SLIDER
+// =====================================================
+
+servoSlider.addEventListener(
+  "input",
+  () =>
+  {
+
+    servoValue.innerHTML =
+      servoSlider.value +
+      "<span>°</span>";
+
+  }
+);
+
+
+// =====================================================
+// SERVO SET
+// =====================================================
+
+setServo.addEventListener(
+  "click",
+  async () =>
+  {
+
+    const angle =
+      servoSlider.value;
+
+
+    setServo.textContent =
+      "SETTING...";
+
+
+    try
+    {
+
+      await fetch(
+        ARDUINO +
+        "/servo?angle=" +
+        angle
+      );
+
+
+      await updateState();
+
+
+      setServo.textContent =
+        "SET SERVO ANGLE";
+
+    }
+
+    catch (error)
+    {
+
+      setServo.textContent =
+        "CONNECTION ERROR";
+
+      disconnected();
+
+    }
+
+  }
+);
+
+
+// =====================================================
+// INITIAL STATE
+// =====================================================
+
+updateState();
+
+
+// =====================================================
+// FAST LOCAL STATE POLLING
+// =====================================================
+//
+// Only local Wi-Fi.
+// No Firebase.
+// 200 ms = very responsive.
+//
+// =====================================================
+
+setInterval(
+  updateState,
+  200
+);
+
+</script>
+
+
+</body>
+
+</html>
