@@ -1,483 +1,218 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Arduino IoT Dashboard</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+    padding: 18px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.header p {
+    margin-top: 7px;
+    color: #94a3b8;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.card-title {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.distance {
+    text-align: center;
+    font-size: 55px;
+    font-weight: bold;
+}
+
+.unit {
+    text-align: center;
+    color: #94a3b8;
+}
+
+.status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.status-row:last-child {
+    border-bottom: none;
+}
+
+.status-name {
+    font-size: 17px;
+}
+
+.status-value {
+    font-weight: bold;
+}
+
+.on {
+    color: #22c55e;
+}
+
+.off {
+    color: #64748b;
+}
+
+.servo-value {
+    color: #38bdf8;
+}
+
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>IEM Arduino IoT Control</title>
-
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-    }
-
-
-    body {
-      margin: 0;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      background:
-        linear-gradient(
-          135deg,
-          #0f172a,
-          #1e293b
-        );
-
-      min-height: 100vh;
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: center;
-
-      color: white;
-
-      padding: 20px;
-    }
-
-
-    .container {
-
-      width: 100%;
-
-      max-width: 500px;
-
-    }
-
-
-    .header {
-
-      text-align: center;
-
-      margin-bottom: 20px;
-
-    }
-
-
-    .header h1 {
-
-      margin: 0;
-
-      font-size: 28px;
-
-    }
-
-
-    .header p {
-
-      margin-top: 8px;
-
-      color: #cbd5e1;
-
-      font-size: 14px;
-
-    }
-
-
-    .connection {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      margin-top: 12px;
-
-      padding: 7px 14px;
-
-      border-radius: 20px;
-
-      background: #334155;
-
-      font-size: 13px;
-
-    }
-
-
-    .dot {
-
-      width: 9px;
-
-      height: 9px;
-
-      border-radius: 50%;
-
-      background: #94a3b8;
-
-    }
-
-
-    .dot.connected {
-
-      background: #22c55e;
-
-    }
-
-
-    .dot.disconnected {
-
-      background: #ef4444;
-
-    }
-
-
-    .card {
-
-      background: rgba(
-        255,
-        255,
-        255,
-        0.08
-      );
-
-      border: 1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.12
-        );
-
-      border-radius: 20px;
-
-      padding: 22px;
-
-      margin-bottom: 16px;
-
-      backdrop-filter: blur(10px);
-
-      box-shadow:
-        0 10px 30px
-        rgba(0, 0, 0, 0.25);
-
-    }
-
-
-    .card-title {
-
-      font-size: 18px;
-
-      font-weight: bold;
-
-      margin-bottom: 18px;
-
-    }
-
-
-    /* =================================================
-       LED CONTROL
-       ================================================= */
-
-
-    .led-row {
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      padding: 15px 0;
-
-      border-bottom:
-        1px solid
-        rgba(
-          255,
-          255,
-          255,
-          0.08
-        );
-
-    }
-
-
-    .led-row:last-child {
-
-      border-bottom: none;
-
-    }
-
-
-    .led-name {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 12px;
-
-      font-size: 16px;
-
-    }
-
-
-    .led-icon {
-
-      font-size: 24px;
-
-    }
-
-
-    /* =================================================
-       TOGGLE
-       ================================================= */
-
-
-    .switch {
-
-      position: relative;
-
-      width: 58px;
-
-      height: 32px;
-
-    }
-
-
-    .switch input {
-
-      opacity: 0;
-
-      width: 0;
-
-      height: 0;
-
-    }
-
-
-    .slider {
-
-      position: absolute;
-
-      cursor: pointer;
-
-      inset: 0;
-
-      background: #475569;
-
-      border-radius: 32px;
-
-      transition: 0.25s;
-
-    }
-
-
-    .slider:before {
-
-      content: "";
-
-      position: absolute;
-
-      width: 24px;
-
-      height: 24px;
-
-      left: 4px;
-
-      top: 4px;
-
-      background: white;
-
-      border-radius: 50%;
-
-      transition: 0.25s;
-
-    }
-
-
-    input:checked + .slider {
-
-      background: #22c55e;
-
-    }
-
-
-    input:checked + .slider:before {
-
-      transform:
-        translateX(26px);
-
-    }
-
-
-    /* =================================================
-       SERVO
-       ================================================= */
-
-
-    .servo-value {
-
-      text-align: center;
-
-      font-size: 42px;
-
-      font-weight: bold;
-
-      margin: 10px 0 20px;
-
-    }
-
-
-    .servo-unit {
-
-      font-size: 18px;
-
-      color: #cbd5e1;
-
-    }
-
-
-    input[type="range"] {
-
-      width: 100%;
-
-      height: 6px;
-
-      cursor: pointer;
-
-    }
-
-
-    .range-labels {
-
-      display: flex;
-
-      justify-content: space-between;
-
-      color: #94a3b8;
-
-      font-size: 12px;
-
-      margin-top: 8px;
-
-    }
-
-
-    .set-button {
-
-      width: 100%;
-
-      margin-top: 22px;
-
-      padding: 14px;
-
-      border: none;
-
-      border-radius: 12px;
-
-      background: #2563eb;
-
-      color: white;
-
-      font-size: 16px;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-      transition: 0.2s;
-
-    }
-
-
-    .set-button:hover {
-
-      background: #3b82f6;
-
-    }
-
-
-    .set-button:active {
-
-      transform: scale(0.98);
-
-    }
-
-
-    /* =================================================
-       CURRENT STATE
-       ================================================= */
-
-
-    .state-grid {
-
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr 1fr;
-
-      gap: 10px;
-
-    }
-
-
-    .state-box {
-
-      text-align: center;
-
-      background:
-        rgba(
-          0,
-          0,
-          0,
-          0.18
-        );
-
-      border-radius: 12px;
-
-      padding: 12px 5px;
-
-    }
-
-
-    .state-label {
-
-      font-size: 11px;
-
-      color: #94a3b8;
-
-      margin-bottom: 6px;
-
-    }
-
-
-    .state-value {
-
-      font-size: 15px;
-
-      font-weight: bold;
-
-    }
-
-
-    .footer {
-
-      text-align: center;
-
-      color: #64748b;
-
-      font-size: 11px;
-
-      margin-top: 18px;
-
-    }
-
-
-  </style>
+/* =========================
+   CONTROL BUTTONS
+   ========================= */
+
+.control-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+button {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+}
+
+.auto-button {
+    background: #2563eb;
+}
+
+.manual-button {
+    background: #7c3aed;
+}
+
+.red-button {
+    background: #dc2626;
+}
+
+.green-button {
+    background: #16a34a;
+}
+
+.gray-button {
+    background: #475569;
+}
+
+.servo-button {
+    background: #0284c7;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+.control-label {
+    margin: 15px 0 8px 0;
+    color: #cbd5e1;
+}
+
+
+/* =========================
+   MODE DISPLAY
+   ========================= */
+
+.mode-display {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.06);
+    margin-bottom: 15px;
+}
+
+.auto-mode {
+    color: #22c55e;
+}
+
+.manual-mode {
+    color: #c084fc;
+}
+
+
+/* =========================
+   CONNECTION
+   ========================= */
+
+.connection {
+    text-align: center;
+    font-weight: bold;
+}
+
+.connected {
+    color: #22c55e;
+}
+
+.disconnected {
+    color: #ef4444;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+</style>
 
 </head>
 
@@ -488,635 +223,654 @@
 <div class="container">
 
 
-  <!-- =================================================
-       HEADER
-       ================================================= -->
+<!-- ================================================= -->
+<!-- HEADER -->
+<!-- ================================================= -->
 
-  <div class="header">
+<div class="header">
 
     <h1>
-      IEM Arduino IoT
+        🤖 Arduino IoT
     </h1>
 
     <p>
-      Manual Hardware Control
+        UNO R4 WiFi • Firebase
     </p>
 
-    <div class="connection">
-
-      <span
-        id="connectionDot"
-        class="dot disconnected">
-      </span>
-
-      <span id="connectionText">
-        Connecting...
-      </span>
-
-    </div>
-
-  </div>
+</div>
 
 
-  <!-- =================================================
-       LED CONTROL
-       ================================================= -->
 
-  <div class="card">
+<!-- ================================================= -->
+<!-- DISTANCE -->
+<!-- ================================================= -->
+
+<div class="card">
 
     <div class="card-title">
-      💡 LED Control
+        Ultrasonic Distance
     </div>
 
+    <div class="distance">
 
-    <!-- RED -->
-
-    <div class="led-row">
-
-      <div class="led-name">
-
-        <span class="led-icon">
-          🔴
+        <span id="distance">
+            --
         </span>
-
-        <span>
-          Red LED
-        </span>
-
-      </div>
-
-
-      <label class="switch">
-
-        <input
-          type="checkbox"
-          id="redSwitch"
-        >
-
-        <span class="slider"></span>
-
-      </label>
 
     </div>
 
-
-    <!-- GREEN -->
-
-    <div class="led-row">
-
-      <div class="led-name">
-
-        <span class="led-icon">
-          🟢
-        </span>
-
-        <span>
-          Green LED
-        </span>
-
-      </div>
-
-
-      <label class="switch">
-
-        <input
-          type="checkbox"
-          id="greenSwitch"
-        >
-
-        <span class="slider"></span>
-
-      </label>
-
+    <div class="unit">
+        centimetres
     </div>
 
-  </div>
+</div>
 
 
-  <!-- =================================================
-       SERVO
-       ================================================= -->
 
-  <div class="card">
+<!-- ================================================= -->
+<!-- HARDWARE STATUS -->
+<!-- ================================================= -->
+
+<div class="card">
 
     <div class="card-title">
-      ⚙️ Servo Motor
+        Hardware Status
     </div>
 
+
+    <div class="status-row">
+
+        <div class="status-name">
+            🔴 Red LED
+        </div>
+
+        <div
+            id="redLED"
+            class="status-value">
+
+            --
+
+        </div>
+
+    </div>
+
+
+    <div class="status-row">
+
+        <div class="status-name">
+            🟢 Green LED
+        </div>
+
+        <div
+            id="greenLED"
+            class="status-value">
+
+            --
+
+        </div>
+
+    </div>
+
+
+    <div class="status-row">
+
+        <div class="status-name">
+            ⚙️ Servo
+        </div>
+
+        <div
+            id="servo"
+            class="status-value servo-value">
+
+            --°
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- CONTROL -->
+<!-- ================================================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        Remote Control
+    </div>
+
+
+    <!-- MODE -->
 
     <div
-      class="servo-value"
-      id="servoValue"
-    >
-      0<span class="servo-unit">°</span>
-    </div>
+        id="modeDisplay"
+        class="mode-display">
 
-
-    <input
-      type="range"
-      id="servoSlider"
-      min="0"
-      max="180"
-      value="0"
-    >
-
-
-    <div class="range-labels">
-
-      <span>0°</span>
-
-      <span>90°</span>
-
-      <span>180°</span>
+        MODE: --
 
     </div>
 
 
-    <button
-      class="set-button"
-      id="servoButton"
-    >
-      SET SERVO ANGLE
-    </button>
+    <div class="control-row">
 
-  </div>
+        <button
+            class="auto-button"
+            onclick="setMode('AUTO')">
+
+            🟢 AUTO
+
+        </button>
 
 
-  <!-- =================================================
-       CURRENT FIREBASE STATE
-       ================================================= -->
+        <button
+            class="manual-button"
+            onclick="setMode('MANUAL')">
 
-  <div class="card">
+            🔵 MANUAL
+
+        </button>
+
+    </div>
+
+
+    <!-- SERVO -->
+
+    <div class="control-label">
+        ⚙️ Servo Position
+    </div>
+
+    <div class="control-row">
+
+        <button
+            class="servo-button"
+            onclick="setServo(0)">
+
+            0°
+
+        </button>
+
+
+        <button
+            class="servo-button"
+            onclick="setServo(90)">
+
+            90°
+
+        </button>
+
+    </div>
+
+
+    <!-- RED LED -->
+
+    <div class="control-label">
+        🔴 Red LED
+    </div>
+
+    <div class="control-row">
+
+        <button
+            class="red-button"
+            onclick="setRed(true)">
+
+            ON
+
+        </button>
+
+
+        <button
+            class="gray-button"
+            onclick="setRed(false)">
+
+            OFF
+
+        </button>
+
+    </div>
+
+
+    <!-- GREEN LED -->
+
+    <div class="control-label">
+        🟢 Green LED
+    </div>
+
+    <div class="control-row">
+
+        <button
+            class="green-button"
+            onclick="setGreen(true)">
+
+            ON
+
+        </button>
+
+
+        <button
+            class="gray-button"
+            onclick="setGreen(false)">
+
+            OFF
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- CONNECTION -->
+<!-- ================================================= -->
+
+<div class="card">
 
     <div class="card-title">
-      📡 Current Device State
+        Cloud Connection
     </div>
 
+    <div
+        id="connection"
+        class="connection">
 
-    <div class="state-grid">
-
-
-      <div class="state-box">
-
-        <div class="state-label">
-          RED LED
-        </div>
-
-        <div
-          class="state-value"
-          id="redState"
-        >
-          OFF
-        </div>
-
-      </div>
-
-
-      <div class="state-box">
-
-        <div class="state-label">
-          GREEN LED
-        </div>
-
-        <div
-          class="state-value"
-          id="greenState"
-        >
-          OFF
-        </div>
-
-      </div>
-
-
-      <div class="state-box">
-
-        <div class="state-label">
-          SERVO
-        </div>
-
-        <div
-          class="state-value"
-          id="servoState"
-        >
-          0°
-        </div>
-
-      </div>
-
+        ● CONNECTING...
 
     </div>
 
-  </div>
+</div>
 
 
-  <div class="footer">
+<div class="footer">
 
-    IIFR Lab • Department of Basic Science & Humanities • IEM
+    IEM • Arduino IoT Demonstration
 
-  </div>
+</div>
 
 
 </div>
 
 
-<!-- ===================================================
-     FIREBASE
-     =================================================== -->
+
+<!-- ================================================= -->
+<!-- FIREBASE -->
+<!-- ================================================= -->
 
 <script type="module">
 
-  import {
+
+// =====================================================
+// IMPORT FIREBASE
+// =====================================================
+
+import {
     initializeApp
-  }
-  from
-  "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 
-  import {
+import {
     getDatabase,
     ref,
     onValue,
     set
-  }
-  from
-  "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 
-  // ===================================================
-  // FIREBASE CONFIG
-  // ===================================================
+// =====================================================
+// FIREBASE CONFIGURATION
+// =====================================================
 
-  const firebaseConfig = {
+const firebaseConfig = {
 
     apiKey:
-      "AIzaSyDDpj3yMSQp-qXpxovh2SDSnhqHT68-Y0k",
+        "AIzaSyDDpj3yMSQp-qXpxovh2SDSnhqHT68-Y0k",
 
     authDomain:
-      "fir-c5299.firebaseapp.com",
+        "fir-c5299.firebaseapp.com",
 
     databaseURL:
-      "https://fir-c5299.firebaseio.com",
+        "https://fir-c5299.firebaseio.com",
 
     projectId:
-      "fir-c5299",
+        "fir-c5299",
 
     storageBucket:
-      "fir-c5299.appspot.com",
+        "fir-c5299.appspot.com",
 
     messagingSenderId:
-      "112949129990",
+        "112949129990",
 
     appId:
-      "1:112949129990:web:4a2ba9d13b0260c23be487",
+        "1:112949129990:web:4a2ba9d13b0260c23be487",
 
     measurementId:
-      "G-JYQV2VPZXT"
-
-  };
-
-
-  // ===================================================
-  // INITIALIZE
-  // ===================================================
-
-  const app =
-    initializeApp(
-      firebaseConfig
-    );
+        "G-JYQV2VPZXT"
+};
 
 
-  const db =
+// =====================================================
+// INITIALIZE
+// =====================================================
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
     getDatabase(app);
 
 
-  const controlRef =
+// =====================================================
+// READ DISTANCE
+// =====================================================
+
+const distanceRef =
     ref(
-      db,
-      "Arduino/control"
+        db,
+        "Arduino/sensor/distance"
     );
 
 
-  // ===================================================
-  // HTML ELEMENTS
-  // ===================================================
+onValue(
+    distanceRef,
+    (snapshot) => {
 
-  const redSwitch =
-    document.getElementById(
-      "redSwitch"
-    );
+        const value =
+            snapshot.val();
 
+        if (value !== null) {
 
-  const greenSwitch =
-    document.getElementById(
-      "greenSwitch"
-    );
+            document
+                .getElementById("distance")
+                .innerText =
+                Number(value).toFixed(2);
 
-
-  const servoSlider =
-    document.getElementById(
-      "servoSlider"
-    );
-
-
-  const servoValue =
-    document.getElementById(
-      "servoValue"
-    );
-
-
-  const servoButton =
-    document.getElementById(
-      "servoButton"
-    );
-
-
-  const redState =
-    document.getElementById(
-      "redState"
-    );
-
-
-  const greenState =
-    document.getElementById(
-      "greenState"
-    );
-
-
-  const servoState =
-    document.getElementById(
-      "servoState"
-    );
-
-
-  const connectionDot =
-    document.getElementById(
-      "connectionDot"
-    );
-
-
-  const connectionText =
-    document.getElementById(
-      "connectionText"
-    );
-
-
-  // ===================================================
-  // CONNECTION STATUS
-  // ===================================================
-
-  function setConnected()
-  {
-
-    connectionDot.className =
-      "dot connected";
-
-    connectionText.textContent =
-      "Firebase Connected";
-
-  }
-
-
-  // ===================================================
-  // LIVE FIREBASE LISTENER
-  // ===================================================
-
-  onValue(
-
-    controlRef,
-
-    (snapshot) =>
-    {
-
-      const data =
-        snapshot.val();
-
-
-      if (!data)
-        return;
-
-
-      setConnected();
-
-
-      // -----------------------------------------------
-      // RED LED
-      // -----------------------------------------------
-
-      if (
-        typeof data.redLED ===
-        "boolean"
-      )
-      {
-
-        redSwitch.checked =
-          data.redLED;
-
-        redState.textContent =
-          data.redLED
-          ? "ON"
-          : "OFF";
-
-      }
-
-
-      // -----------------------------------------------
-      // GREEN LED
-      // -----------------------------------------------
-
-      if (
-        typeof data.greenLED ===
-        "boolean"
-      )
-      {
-
-        greenSwitch.checked =
-          data.greenLED;
-
-        greenState.textContent =
-          data.greenLED
-          ? "ON"
-          : "OFF";
-
-      }
-
-
-      // -----------------------------------------------
-      // SERVO
-      // -----------------------------------------------
-
-      if (
-        typeof data.servo ===
-        "number"
-      )
-      {
-
-        servoSlider.value =
-          data.servo;
-
-        servoValue.innerHTML =
-          data.servo +
-          '<span class="servo-unit">°</span>';
-
-        servoState.textContent =
-          data.servo + "°";
-
-      }
-
-    },
-
-    (error) =>
-    {
-
-      console.error(
-        error
-      );
-
-      connectionDot.className =
-        "dot disconnected";
-
-      connectionText.textContent =
-        "Firebase Error";
+        }
 
     }
+);
 
-  );
+
+// =====================================================
+// READ RED LED
+// =====================================================
+
+const redRef =
+    ref(
+        db,
+        "Arduino/output/redLED"
+    );
 
 
-  // ===================================================
-  // RED LED
-  // ===================================================
+onValue(
+    redRef,
+    (snapshot) => {
 
-  redSwitch.addEventListener(
-    "change",
-    async () =>
-    {
+        const value =
+            snapshot.val();
 
-      try
-      {
+        const element =
+            document
+                .getElementById("redLED");
 
-        await set(
-          ref(
+
+        element.innerText =
+            value ? "ON" : "OFF";
+
+
+        element.className =
+            value
+                ? "status-value on"
+                : "status-value off";
+
+    }
+);
+
+
+// =====================================================
+// READ GREEN LED
+// =====================================================
+
+const greenRef =
+    ref(
+        db,
+        "Arduino/output/greenLED"
+    );
+
+
+onValue(
+    greenRef,
+    (snapshot) => {
+
+        const value =
+            snapshot.val();
+
+        const element =
+            document
+                .getElementById("greenLED");
+
+
+        element.innerText =
+            value ? "ON" : "OFF";
+
+
+        element.className =
+            value
+                ? "status-value on"
+                : "status-value off";
+
+    }
+);
+
+
+// =====================================================
+// READ SERVO
+// =====================================================
+
+const servoRef =
+    ref(
+        db,
+        "Arduino/output/servo"
+    );
+
+
+onValue(
+    servoRef,
+    (snapshot) => {
+
+        const value =
+            snapshot.val();
+
+        document
+            .getElementById("servo")
+            .innerText =
+            value + "°";
+
+    }
+);
+
+
+// =====================================================
+// READ MODE
+// =====================================================
+
+const modeRef =
+    ref(
+        db,
+        "Arduino/control/mode"
+    );
+
+
+onValue(
+    modeRef,
+    (snapshot) => {
+
+        const value =
+            snapshot.val();
+
+        const element =
+            document
+                .getElementById("modeDisplay");
+
+
+        if (value === null) {
+
+            element.innerText =
+                "MODE: AUTO";
+
+            element.className =
+                "mode-display auto-mode";
+
+            return;
+        }
+
+
+        element.innerText =
+            "MODE: " + value;
+
+
+        if (value === "AUTO") {
+
+            element.className =
+                "mode-display auto-mode";
+
+        }
+
+        else {
+
+            element.className =
+                "mode-display manual-mode";
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// FIREBASE CONNECTION
+// =====================================================
+
+const connectedRef =
+    ref(
+        db,
+        ".info/connected"
+    );
+
+
+onValue(
+    connectedRef,
+    (snapshot) => {
+
+        const connected =
+            snapshot.val();
+
+        const element =
+            document
+                .getElementById("connection");
+
+
+        if (connected) {
+
+            element.innerText =
+                "● LIVE — CONNECTED";
+
+            element.className =
+                "connection connected";
+
+        }
+
+        else {
+
+            element.innerText =
+                "● OFFLINE";
+
+            element.className =
+                "connection disconnected";
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// WRITE MODE
+// =====================================================
+
+window.setMode = function(mode)
+{
+
+    set(
+        ref(
             db,
-            "Arduino/control/redLED"
-          ),
-          redSwitch.checked
-        );
+            "Arduino/control/mode"
+        ),
+        mode
+    );
 
-      }
-      catch (error)
-      {
-
-        console.error(
-          error
-        );
-
-      }
-
-    }
-  );
+};
 
 
-  // ===================================================
-  // GREEN LED
-  // ===================================================
+// =====================================================
+// WRITE SERVO
+// =====================================================
 
-  greenSwitch.addEventListener(
-    "change",
-    async () =>
-    {
+window.setServo = function(angle)
+{
 
-      try
-      {
-
-        await set(
-          ref(
-            db,
-            "Arduino/control/greenLED"
-          ),
-          greenSwitch.checked
-        );
-
-      }
-      catch (error)
-      {
-
-        console.error(
-          error
-        );
-
-      }
-
-    }
-  );
-
-
-  // ===================================================
-  // SERVO SLIDER
-  // ===================================================
-
-  servoSlider.addEventListener(
-    "input",
-    () =>
-    {
-
-      servoValue.innerHTML =
-        servoSlider.value +
-        '<span class="servo-unit">°</span>';
-
-    }
-  );
-
-
-  // ===================================================
-  // SERVO SET BUTTON
-  // ===================================================
-
-  servoButton.addEventListener(
-    "click",
-    async () =>
-    {
-
-      const angle =
-        Number(
-          servoSlider.value
-        );
-
-
-      servoButton.textContent =
-        "SETTING...";
-
-
-      try
-      {
-
-        await set(
-          ref(
+    set(
+        ref(
             db,
             "Arduino/control/servo"
-          ),
-          angle
-        );
+        ),
+        angle
+    );
+
+};
 
 
-        servoButton.textContent =
-          "SET SERVO ANGLE";
+// =====================================================
+// WRITE RED LED
+// =====================================================
+
+window.setRed = function(state)
+{
+
+    set(
+        ref(
+            db,
+            "Arduino/control/redLED"
+        ),
+        state
+    );
+
+};
 
 
-      }
-      catch (error)
-      {
+// =====================================================
+// WRITE GREEN LED
+// =====================================================
 
-        console.error(
-          error
-        );
+window.setGreen = function(state)
+{
 
-        servoButton.textContent =
-          "ERROR — TRY AGAIN";
+    set(
+        ref(
+            db,
+            "Arduino/control/greenLED"
+        ),
+        state
+    );
 
-      }
+};
 
-    }
-  );
 
 </script>
 
